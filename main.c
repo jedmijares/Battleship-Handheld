@@ -10,7 +10,7 @@ int main(void){
   PLL_Init();                           // set system clock to 80 MHz
   Nokia5110_Init();
   SysTick_Init();
-	PortF_Init();
+  PortF_Init();
   Nokia5110_Clear();
   
 	while(1)
