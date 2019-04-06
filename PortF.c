@@ -60,3 +60,7 @@ void blueToggle(void){
 void redToggle(void){
 	RLED ^= 0xFF;
 }
+
+void greenToggle(void){
+	GLED ^= 0xFF;
+}

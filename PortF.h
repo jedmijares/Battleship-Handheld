@@ -11,5 +11,7 @@ void blueOn(void);
 void blueOff(void);
 void greenOn(void);
 void greenOff(void);
-
+void blueToggle(void);
+void redToggle(void);
+void greenToggle(void);
 #endif
