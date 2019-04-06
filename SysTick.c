@@ -12,6 +12,16 @@ void SysTick_Init(unsigned long period){
   EnableInterrupts();
 }
 
+volatile unsigned long ms = 0;
+
+void SysTick_Handler(void)
+{
+  //GPIO_PORTF_DATA_R ^= 0x04;       // toggle PF2
+  ms = ms + 1;
+}
+
+unsigned long millis(void) {return ms;}
+
 //void delay1ms(int millis){
 //	//Use the Systick Timer to generate a 1ms delay
 //	int i = 0;

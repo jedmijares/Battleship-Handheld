@@ -26,7 +26,7 @@ void PortF_Init(void){
 
 uint32_t pushbuttons(void){
 	//Return the state of the buttons
-	return PF40;
+	return(PF40 & 0x11);
 }
 
 void blueOn(void){
