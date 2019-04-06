@@ -1,3 +1,6 @@
+// main file for EE 287 final project
+// By Jed Mijares and Jacob Culler
+
 #include "Nokia5110.h"
 #include "PLL.h"
 #include "PortF.h"
@@ -45,6 +48,7 @@ int main(void)
 	PLL_Init();
 	PortF_Init();
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
+	
 	while(1)
 	{
 		if((millis() - bPrevious) >= bInt)
@@ -65,6 +69,5 @@ int main(void)
 			}
 		}
 		oldReading = reading;
-
 	}
 }
