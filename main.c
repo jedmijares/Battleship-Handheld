@@ -131,40 +131,35 @@ int main(void){
   PortF_Init();
   Nokia5110_Clear();
 	Nokia5110_PrintBMP(0, 47, grid, 1);
-	Nokia5110_DisplayBuffer();
-	Nokia5110_SetCursor(8, 0);
-<<<<<<< HEAD
-	Nokia5110_OutString("You");
-}
+
   
-=======
 	Nokia5110_OutString("Them");
 	delay1ms(1000);
-	Nokia5110_PrintBMP(0, 4, hit);
+	Nokia5110_PrintBMP(0, 4, hit,1);
 	Nokia5110_DisplayBuffer();
   Nokia5110_SetCursor(8, 0);
 	Nokia5110_OutString("Them");
 	delay1ms(1000);
-	Nokia5110_PrintBMP(0, 10, miss);
+	Nokia5110_PrintBMP(0, 10, miss,1);
 	Nokia5110_DisplayBuffer();
   Nokia5110_SetCursor(8, 0);
 	Nokia5110_OutString("Them");
 	delay1ms(1000);
-	Nokia5110_PrintBMP(7, 4, boat1s);
+	Nokia5110_PrintBMP(7, 4, boat1s,1);
 	Nokia5110_DisplayBuffer();
   Nokia5110_SetCursor(8, 0);
 	Nokia5110_OutString("Them");
 	while(1){
-	Nokia5110_PrintBMP(0, 4, hitOutline);
+	Nokia5110_PrintBMP(0, 4, hitOutline,1);
 	Nokia5110_DisplayBuffer();
 	delay1ms(400);
-	Nokia5110_PrintBMP(0, 4, hit);
+	Nokia5110_PrintBMP(0, 4, hit,1);
 	Nokia5110_DisplayBuffer();
 	delay1ms(400);
 	}
+}
 	
 	
->>>>>>> jacob
 //	while(1)
 //	{
 //		buttons = pushbuttons();
