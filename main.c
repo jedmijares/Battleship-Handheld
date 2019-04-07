@@ -52,6 +52,7 @@ int main(void)
 	select(board, xCursor, yCursor);
 	while(1)
 	{
+		//delay1ms(1000);
 		buttons = pushbuttons();
 		if(buttons == 0x10) 
 		{
@@ -59,13 +60,18 @@ int main(void)
 			select(board, xCursor, yCursor);
 			delay1ms(250);
 		}
-		if(buttons == 0x01) 
+		else if(buttons == 0x01) 
 		{
 			yCursor++;
 			select(board, xCursor, yCursor);
 			delay1ms(250);
 		}
-		
+		else if(buttons == 0x00)
+		{
+			board[xCursor][yCursor].isHit = 1;
+			print(board);
+			delay1ms(250);
+		}
 	}
 }
 
