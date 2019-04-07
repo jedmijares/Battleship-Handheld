@@ -17,6 +17,14 @@
 //  PortF_Init();
 //  Nokia5110_Clear();
 //  
+
+struct Square
+{
+	short isShip;
+	short isHit;
+};
+typedef struct Square Sea;
+
 const unsigned char grid[] ={
  0x42, 0x4D, 0xB6, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x38, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x00, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x40, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x80,
@@ -115,6 +123,8 @@ const unsigned char Boat1sOutline[] ={
 
 };
 const unsigned char hitOutline[] ={
+	
+	
  0x42, 0x4D, 0x8A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x80,
  0x00, 0x00, 0x00, 0x80, 0x80, 0x00, 0x80, 0x00, 0x00, 0x00, 0x80, 0x00, 0x80, 0x00, 0x80, 0x80, 0x00, 0x00, 0x80, 0x80, 0x80, 0x00, 0xC0, 0xC0, 0xC0, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0xFF,
@@ -122,66 +132,81 @@ const unsigned char hitOutline[] ={
  0x0F, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0x00, 0xFF,
 
 };
-int main(void){
-	unsigned short xpos = 0;
-	short buttons = 0;
-  PLL_Init();                           // set system clock to 80 MHz
-  Nokia5110_Init();
-  SysTick_Init(80000);
-  PortF_Init();
-  Nokia5110_Clear();
-	Nokia5110_PrintBMP(0, 47, grid, 1);
 
-  
-	Nokia5110_OutString("Them");
-	delay1ms(1000);
-	Nokia5110_PrintBMP(0, 4, hit,1);
-	Nokia5110_DisplayBuffer();
-  Nokia5110_SetCursor(8, 0);
-	Nokia5110_OutString("Them");
-	delay1ms(1000);
-	Nokia5110_PrintBMP(0, 10, miss,1);
-	Nokia5110_DisplayBuffer();
-  Nokia5110_SetCursor(8, 0);
-	Nokia5110_OutString("Them");
-	delay1ms(1000);
-	Nokia5110_PrintBMP(7, 4, boat1s,1);
-	Nokia5110_DisplayBuffer();
-  Nokia5110_SetCursor(8, 0);
-	Nokia5110_OutString("Them");
-	while(1){
-	Nokia5110_PrintBMP(0, 4, hitOutline,1);
-	Nokia5110_DisplayBuffer();
-	delay1ms(400);
-	Nokia5110_PrintBMP(0, 4, hit,1);
-	Nokia5110_DisplayBuffer();
-	delay1ms(400);
+int main(void)
+{
+	int i, j;
+	Sea grid[8][8];
+	short xCursor = 0;
+	short yCursor = 0;
+	short buttons = 0x11;
+	
+	PLL_Init();
+	PortF_Init();
+	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
+	
+	for(i = 0; i < 7; i++)
+	{
+		for(j = 0; j < 7; j++)
+		{
+			grid[i][j].isHit = 0;
+			grid[i][j].isShip = 0;
+		}
+	}
+	grid[0][3].isShip = 1;
+	
+	while(1)
+	{
+		if(pushbuttons() == 0x10) 
+		{
+			xCursor++;
+			delay1ms(50);
+		}
+		if(pushbuttons() == 0x01) 
+		{
+			yCursor++;
+			delay1ms(50);
+		}
 	}
 }
-	
-	
-//	while(1)
-//	{
-//		buttons = pushbuttons();
-//		if(buttons == 0x10)
-//		{
-//			xpos--;
-//			delay1ms(67);
-//		}
-//		else if(buttons == 0x01)
-//		{
-//			xpos++;
-//			delay1ms(67);
-//		}
-//		if(xpos > 84)
-//			xpos = 80;
-//		if(xpos < 1)
-//			xpos = 1;
-//		
-//		Nokia5110_PrintBMP(0, 0, grid);
-//		Nokia5110_DisplayBuffer();
+
+
+//int main(void){
+//  PLL_Init();                           // set system clock to 80 MHz
+//  Nokia5110_Init();
+//  SysTick_Init(80000);
+//  PortF_Init();
+//  Nokia5110_Clear();
+//	Nokia5110_PrintBMP(0, 47, grid, 1);
+
+//  
+//	Nokia5110_OutString("Them");
+//	delay1ms(1000);
+//	Nokia5110_PrintBMP(0, 4, hit,1);
+//	Nokia5110_DisplayBuffer();
+//  Nokia5110_SetCursor(8, 0);
+//	Nokia5110_OutString("Them");
+//	delay1ms(1000);
+//	Nokia5110_PrintBMP(0, 10, miss,1);
+//	Nokia5110_DisplayBuffer();
+//  Nokia5110_SetCursor(8, 0);
+//	Nokia5110_OutString("Them");
+//	delay1ms(1000);
+//	Nokia5110_PrintBMP(7, 4, boat1s,1);
+//	Nokia5110_DisplayBuffer();
+//  Nokia5110_SetCursor(8, 0);
+//	Nokia5110_OutString("Them");
+//	while(1){
+//	Nokia5110_PrintBMP(0, 4, hitOutline,1);
+//	Nokia5110_DisplayBuffer();
+//	delay1ms(400);
+//	Nokia5110_PrintBMP(0, 4, hit,1);
+//	Nokia5110_DisplayBuffer();
+//	delay1ms(400);
 //	}
 //}
+	
+	
 
 //int main(void)
 //{
