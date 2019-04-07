@@ -22,13 +22,13 @@ void SysTick_Handler(void)
 
 unsigned long millis(void) {return ms;}
 
-//void delay1ms(int millis){
-//	//Use the Systick Timer to generate a 1ms delay
-//	int i = 0;
-//	for(i = 0; i < millis; i++)
-//	{
-//		NVIC_ST_RELOAD_R = 80000-1;  // number of counts to wait
-//		NVIC_ST_CURRENT_R = 0;       // any value written to CURRENT clears
-//		while((NVIC_ST_CTRL_R&0x00010000)==0){} // wait for count flag
-//	}
-//}
+void delay1ms(int millis){
+	//Use the Systick Timer to generate a 1ms delay
+	int i = 0;
+	for(i = 0; i < millis; i++)
+	{
+		NVIC_ST_RELOAD_R = 80000-1;  // number of counts to wait
+		NVIC_ST_CURRENT_R = 0;       // any value written to CURRENT clears
+		while((NVIC_ST_CTRL_R&0x00010000)==0){} // wait for count flag
+	}
+}

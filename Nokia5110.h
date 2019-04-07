@@ -273,7 +273,7 @@ void Nokia5110_DrawFullImage(const char *ptr);
 //                     0 to 14
 //                     0 is fine for ships, explosions, projectiles, and bunkers
 // outputs: none
-void Nokia5110_PrintBMP(unsigned char xpos, unsigned char ypos, const unsigned char *ptr, unsigned char threshold);
+void Nokia5110_PrintBMP(unsigned char xpos, unsigned char ypos, const unsigned char *ptr);
 
 // There is a buffer in RAM that holds one screen
 // This routine clears this buffer

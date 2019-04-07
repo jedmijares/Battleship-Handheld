@@ -329,7 +329,7 @@ char Screen[SCREENW*SCREENH/8]; // buffer stores the next image to be printed on
 //                     0 to 14
 //                     0 is fine for ships, explosions, projectiles, and bunkers
 // outputs: none
-void Nokia5110_PrintBMP(unsigned char xpos, unsigned char ypos, const unsigned char *ptr, unsigned char threshold){
+void Nokia5110_PrintBMP(unsigned char xpos, unsigned char ypos, const unsigned char *ptr){
   long width = ptr[18], height = ptr[22], i, j;
   unsigned short screenx, screeny;
   unsigned char mask;
@@ -341,9 +341,7 @@ void Nokia5110_PrintBMP(unsigned char xpos, unsigned char ypos, const unsigned c
      (ypos > SCREENH))           { // bottom cut off
     return;
   }
-  if(threshold > 14){
-    threshold = 14;             // only full 'on' turns pixel on
-  }
+
   // bitmaps are encoded backwards, so start at the bottom left corner of the image
   screeny = ypos/8;
   screenx = xpos + SCREENW*screeny;
@@ -352,14 +350,14 @@ void Nokia5110_PrintBMP(unsigned char xpos, unsigned char ypos, const unsigned c
   j = ptr[10];                  // byte 10 contains the offset where image data can be found
   for(i=1; i<=(width*height/2); i=i+1){
     // the left pixel is in the upper 4 bits
-    if(((ptr[j]>>4)&0xF) > threshold){
+    if(((ptr[j]>>4)&0xF) > 14){
       Screen[screenx] |= mask;
     } else{
       Screen[screenx] &= ~mask;
     }
     screenx = screenx + 1;
     // the right pixel is in the lower 4 bits
-    if((ptr[j]&0xF) > threshold){
+    if((ptr[j]&0xF) > 14){
       Screen[screenx] |= mask;
     } else{
       Screen[screenx] &= ~mask;
@@ -432,6 +430,10 @@ void Nokia5110_ClearPixel(unsigned char x, unsigned char y) {
 // outputs: none
 // assumes: LCD is in default horizontal addressing mode (V = 0)
 void Nokia5110_DisplayBuffer(void){
+  Nokia5110_DrawFullImage(Screen);
+}
+
+void Nokia5110_DisplayBuffer2(void){
   Nokia5110_DrawFullImage(Screen);
 }
 
