@@ -76,10 +76,11 @@ int main(void){
   SysTick_Init(80000);
   PortF_Init();
   Nokia5110_Clear();
-	Nokia5110_PrintBMP(0, 47, grid);
+	Nokia5110_PrintBMP(0, 47, grid, 1);
 	Nokia5110_DisplayBuffer();
 	Nokia5110_SetCursor(8, 0);
-	Nokia5110_OutString("Them");
+	Nokia5110_OutString("You");
+}
   
 //	while(1)
 //	{
@@ -104,39 +105,39 @@ int main(void){
 //	}
 //}
 
-int main(void)
-{
-	short reading; // reading of buttons
-	short buttonState;
-	short oldReading = 0x11; // previous reading of buttons
-	unsigned long lastDebounceTime = 0;
-	unsigned long debounceDelay = 50; // time to wait before more button input
-	unsigned long bInt = 1000; // time to toggle blue
-	unsigned long bPrevious = 0;
-	
-	PLL_Init();
-	PortF_Init();
-	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
-	
-	while(1)
-	{
-		if((millis() - bPrevious) >= bInt)
-		{
-			bPrevious = millis();
-			blueToggle();
-		}
-		
-		reading = pushbuttons(); // read value of buttons
-		if( reading != oldReading ) lastDebounceTime = millis(); // if reading does not match last value, we're still bouncing
-		if( (millis() - lastDebounceTime) > debounceDelay) // if the time since the last bounce is greater than the delay, step in
-		{
-			if (reading != buttonState) // if the reading does not match what the computer thinks the button was last, step in
-			{
-				buttonState = reading;
-				if(buttonState == 0x10)
-					greenToggle();
-			}
-		}
-		oldReading = reading;
-	}
-}
+//int main(void)
+//{
+//	short reading; // reading of buttons
+//	short buttonState;
+//	short oldReading = 0x11; // previous reading of buttons
+//	unsigned long lastDebounceTime = 0;
+//	unsigned long debounceDelay = 50; // time to wait before more button input
+//	unsigned long bInt = 1000; // time to toggle blue
+//	unsigned long bPrevious = 0;
+//	
+//	PLL_Init();
+//	PortF_Init();
+//	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
+//	
+//	while(1)
+//	{
+//		if((millis() - bPrevious) >= bInt)
+//		{
+//			bPrevious = millis();
+//			blueToggle();
+//		}
+//		
+//		reading = pushbuttons(); // read value of buttons
+//		if( reading != oldReading ) lastDebounceTime = millis(); // if reading does not match last value, we're still bouncing
+//		if( (millis() - lastDebounceTime) > debounceDelay) // if the time since the last bounce is greater than the delay, step in
+//		{
+//			if (reading != buttonState) // if the reading does not match what the computer thinks the button was last, step in
+//			{
+//				buttonState = reading;
+//				if(buttonState == 0x10)
+//					greenToggle();
+//			}
+//		}
+//		oldReading = reading;
+//	}
+//}
