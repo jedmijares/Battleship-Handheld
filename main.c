@@ -25,7 +25,7 @@
 int main(void)
 {
 	int i, j;
-	Sea grid[8][8];
+	Sea board[8][8];
 	short xCursor = 0;
 	short yCursor = 0;
 	short buttons = 0x11;
@@ -35,28 +35,37 @@ int main(void)
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	
-	for(i = 0; i < 7; i++)
+	for(i = 0; i < 8; i++)
 	{
-		for(j = 0; j < 7; j++)
+		for(j = 0; j < 8; j++)
 		{
-			grid[i][j].isHit = 0;
-			grid[i][j].isShip = 0;
+			board[i][j].isHit = 0;
+			board[i][j].isShip = 0;
 		}
 	}
-	grid[0][3].isShip = 1;
-	print(grid);
+	board[3][3].isShip = 1;
+	board[3][3].isHit = 1;
+	board[1][0].isHit = 1;
+	board[1][1].isShip = 1;
+	printGrid();
+	print(board);
+	select(board, xCursor, yCursor);
 	while(1)
 	{
-		if(pushbuttons() == 0x10) 
+		buttons = pushbuttons();
+		if(buttons == 0x10) 
 		{
 			xCursor++;
-			delay1ms(50);
+			select(board, xCursor, yCursor);
+			delay1ms(250);
 		}
-		if(pushbuttons() == 0x01) 
+		if(buttons == 0x01) 
 		{
 			yCursor++;
-			delay1ms(50);
+			select(board, xCursor, yCursor);
+			delay1ms(250);
 		}
+		
 	}
 }
 
