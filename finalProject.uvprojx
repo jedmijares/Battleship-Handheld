@@ -432,6 +432,21 @@
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
             </File>
+            <File>
+              <FileName>printMatrix.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\printMatrix.c</FilePath>
+            </File>
+            <File>
+              <FileName>printMatrix.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\printMatrix.h</FilePath>
+            </File>
+            <File>
+              <FileName>squares.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\squares.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
