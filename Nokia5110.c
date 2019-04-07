@@ -325,9 +325,6 @@ char Screen[SCREENW*SCREENH/8]; // buffer stores the next image to be printed on
 //                     must be less than 48
 //                     2 is near the top; 47 is at the bottom
 //         ptr       pointer to a 16 color BMP image
-//         threshold grayscale colors above this number make corresponding pixel 'on'
-//                     0 to 14
-//                     0 is fine for ships, explosions, projectiles, and bunkers
 // outputs: none
 void Nokia5110_PrintBMP(unsigned char xpos, unsigned char ypos, const unsigned char *ptr){
   long width = ptr[18], height = ptr[22], i, j;
