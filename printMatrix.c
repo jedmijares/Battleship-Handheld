@@ -112,8 +112,9 @@ const unsigned char hitOutline[] ={
 //text starts at 8,0
 
 void print(Sea in[8][8]){
-	for(int i = 0; i<8; i++){
-		for(int j = 0; j<8; j++){
+	Nokia5110_PrintBMP(0,47,grid,1);
+	for(int i = 0; i<7; i++){
+		for(int j = 0; j<7; j++){
 			if(in[i][j].isHit && in[i][j].isShip){
 				Nokia5110_PrintBMP(i*7, j*6+4, hit,1);				
 			}

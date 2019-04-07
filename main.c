@@ -33,6 +33,7 @@ int main(void)
 	PLL_Init();
 	PortF_Init();
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
+	Nokia5110_Init();
 	
 	for(i = 0; i < 7; i++)
 	{
@@ -44,8 +45,6 @@ int main(void)
 	}
 	grid[0][3].isShip = 1;
 	print(grid);
-	Nokia5110_SetPixel(3,3);
-	Nokia5110_DisplayBuffer();
 	while(1)
 	{
 		if(pushbuttons() == 0x10) 
