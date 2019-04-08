@@ -26,21 +26,32 @@ Sea board[8][8];
 short xCursor = 0;
 short yCursor = 0;
 
+void checkBounds(short *x , short *y){
+	if(*x > 7)
+		*x = 7;
+	if(*x < 0)
+		*x = 0;
+	if(*y < 0)
+		*y = 0;
+	if(*y > 7)
+		*y = 7;
+}
+
 void fire(){
+	checkBounds(&xCursor, &yCursor);
 	board[xCursor][yCursor].isHit = 1;
 	print(board);
 	select(board, xCursor, yCursor);
-	Nokia5110_DisplayBuffer();
 }
 void xPlus(){
 	xCursor++;
+	checkBounds(&xCursor, &yCursor);
 	select(board, xCursor, yCursor);
-	Nokia5110_DisplayBuffer();
 }
 void yPlus(){
 	yCursor++;
+	checkBounds(&xCursor, &yCursor);
 	select(board, xCursor, yCursor);
-	Nokia5110_DisplayBuffer();
 }
 
 int main(void)
@@ -64,10 +75,8 @@ int main(void)
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	
-	for(i = 0; i < 8; i++)
-	{
-		for(j = 0; j < 8; j++)
-		{
+	for(i = 0; i < 8; i++){
+		for(j = 0; j < 8; j++){
 			board[i][j].isHit = 0;
 			board[i][j].isShip = 0;
 		}
@@ -78,6 +87,8 @@ int main(void)
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
+	Nokia5110_SetCursor(8,0);
+	Nokia5110_OutChar('0');
 	Nokia5110_DisplayBuffer();
 	while(1)
 	{
