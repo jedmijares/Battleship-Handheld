@@ -44,7 +44,7 @@ void yPlus(){
 }
 
 int main(void)
-{
+{		
 	int i, j;
 	int shotsFired = 0;
 	int goodShots = 0;
@@ -52,7 +52,12 @@ int main(void)
 	Sea board[8][8];
 	short xCursor = 0;
 	short yCursor = 0;
-	short buttons = 0x11;
+	//short buttons = 0x11;
+	short reading; // reading of buttons
+	short buttonState;
+	short oldReading = 0x11; // previous reading of buttons
+	unsigned long lastDebounceTime = 0;
+	unsigned long debounceDelay = 50; // time to wait before more button input
 	
 	PLL_Init();
 	PortF_Init();
@@ -67,93 +72,50 @@ int main(void)
 			board[i][j].isShip = 0;
 		}
 	}
-	board[3][3].isShip = 1;
-	//board[3][3].isHit = 1;
-	//board[1][0].isHit = 1;
-	board[1][1].isShip = 1;
+	board[0][3].isShip = 1;
+	board[0][2].isShip = 1;
+	board[0][1].isShip = 1;
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
 	Nokia5110_DisplayBuffer();
 	while(1)
 	{
-		delay1ms(1000);
-		buttons = pushbuttons();
-		if(buttons == 0x10) 
+		reading = pushbuttons(); // read value of buttons
+		if(reading != oldReading ) lastDebounceTime = millis(); // if reading does not match last value, we're still bouncing
+		if((millis() - lastDebounceTime) > debounceDelay) // if the time since the last bounce is greater than the delay, step in
 		{
-			xCursor++;
-			select(board, xCursor, yCursor);
-			Nokia5110_DisplayBuffer();
-			delay1ms(250);
+			if (reading != buttonState) // if the reading does not match what the computer thinks the button was last, step in
+			{
+				buttonState = reading;
+				if(buttonState == 0x10)
+				{
+					xCursor++;
+					select(board, xCursor, yCursor);
+					Nokia5110_DisplayBuffer();
+				}
+				if(buttonState == 0x01) 
+				{
+					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
+					board[xCursor][yCursor].isHit = 1;
+					print(board);
+					select(board, xCursor, yCursor);
+					Nokia5110_DisplayBuffer();
+					shotsFired++;
+				}
+			}
+			
 		}
-		else if(buttons == 0x01) 
-		{
-			yCursor++;
-			select(board, xCursor, yCursor);
-			Nokia5110_DisplayBuffer();
-			delay1ms(250);
-		}
-		else if(buttons == 0x00)
-		{
-			if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
-			board[xCursor][yCursor].isHit = 1;
-			print(board);
-			select(board, xCursor, yCursor);
-			Nokia5110_DisplayBuffer();
-			delay1ms(250);
-			shotsFired++;
-		}
-//		if (millis() > 3000 && millis() < 4000)
-//		{
-//			Nokia5110_SetCursor(8, 0);
-//			Nokia5110_OutString("13");
-//		}
+		
+		oldReading = reading;
 		//sprintf(shotsString, "%d", shotsFired);
-		Nokia5110_SetCursor(7,0);
-		Nokia5110_OutUDec(shotsFired);
+		Nokia5110_SetCursor(8,0);
+		//Nokia5110_OutUDec(shotsFired);
 		//itoa(shotsFired,shotsString,10);
-		//Nokia5110_OutString(shotsString);
+		Nokia5110_OutChar((char)shotsFired);
 		
 	}
 }
-
-
-//int main(void){
-//  PLL_Init();                           // set system clock to 80 MHz
-//  Nokia5110_Init();
-//  SysTick_Init(80000);
-//  PortF_Init();
-//  Nokia5110_Clear();
-//	Nokia5110_PrintBMP(0, 47, grid, 1);
-
-//  
-//	Nokia5110_OutString("Them");
-//	delay1ms(1000);
-//	Nokia5110_PrintBMP(0, 4, hit,1);
-//	Nokia5110_DisplayBuffer();
-//  Nokia5110_SetCursor(8, 0);
-//	Nokia5110_OutString("Them");
-//	delay1ms(1000);
-//	Nokia5110_PrintBMP(0, 10, miss,1);
-//	Nokia5110_DisplayBuffer();
-//  Nokia5110_SetCursor(8, 0);
-//	Nokia5110_OutString("Them");
-//	delay1ms(1000);
-//	Nokia5110_PrintBMP(7, 4, boat1s,1);
-//	Nokia5110_DisplayBuffer();
-//  Nokia5110_SetCursor(8, 0);
-//	Nokia5110_OutString("Them");
-//	while(1){
-//	Nokia5110_PrintBMP(0, 4, hitOutline,1);
-//	Nokia5110_DisplayBuffer();
-//	delay1ms(400);
-//	Nokia5110_PrintBMP(0, 4, hit,1);
-//	Nokia5110_DisplayBuffer();
-//	delay1ms(400);
-//	}
-//}
-	
-	
 
 //int main(void)
 //{
