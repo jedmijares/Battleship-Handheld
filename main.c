@@ -45,7 +45,7 @@ int main(void)
 {		
 	int i, j;
 	int shotsFired = 0;
-	//int goodShots = 0;
+	int goodShots = 0;
 	//char* shotsString;//[sizeof(int)*8+1];
 	Sea board[8][8];
 	short xCursor = 0;
