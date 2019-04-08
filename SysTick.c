@@ -1,6 +1,7 @@
 #include "SysTick.h"
 #include "tm4c123gh6pm.h"
 #include "stdint.h"
+#include "Nokia5110.h"
 
 void SysTick_Init(unsigned long period){
   NVIC_ST_CTRL_R = 0;         // disable SysTick during setup
@@ -16,7 +17,18 @@ volatile unsigned long ms = 0;
 
 void SysTick_Handler(void)
 {
-  //GPIO_PORTF_DATA_R ^= 0x04;       // toggle PF2
+	if(ms%400 == 0){
+		if(pushbuttons() == 0x10) 
+			xPlus();
+		else if(pushbuttons() == 0x01) 
+			yPlus();
+		else if(pushbuttons() == 0x00)
+			fire();
+	}
+	if(ms%400 == 0){
+		toggle();
+		Nokia5110_DisplayBuffer();
+	}
   ms = ms + 1;
 }
 
