@@ -60,12 +60,13 @@ int main(void)
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	
-	for(int i = 0; i < 8; i++){
-		for(int j = 0; j < 8; j++){
+	for(short i = 0; i < 8; i++){
+		for(short j = 0; j < 8; j++){
 			board[i][j].isHit = 0;
 			board[i][j].isShip = 0;
 		}
 	}
+	board[1][1].isShip = 1;
 	board[0][0].isShip = 1;
 	board[0][2].isShip = 1;
 	board[0][1].isShip = 1;
@@ -94,10 +95,9 @@ int main(void)
 				}
 				if(buttonState == 0x01) 
 				{
-					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
+					//if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
 					fire();
-					shotsFired++;
-					print(board);
+					//shotsFired++;
 				}
 			}
 		}
