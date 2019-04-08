@@ -27,9 +27,9 @@ void checkBounds(short *x , short *y){
 void fire(){
 	checkBounds(&xCursor, &yCursor);
 	board[xCursor][yCursor].isHit = 1;
-	print(board);
 	select(board, xCursor, yCursor);
 }
+
 void xPlus(){
 	xCursor++;
 	checkBounds(&xCursor, &yCursor);
@@ -67,10 +67,10 @@ int main(void)
 			board[i][j].isShip = 0;
 		}
 	}
-	board[0][3].isShip = 1;
+	board[0][0].isShip = 1;
 	board[0][2].isShip = 1;
 	board[0][1].isShip = 1;
-	board[0][1].isHit = 1;
+	board[0][0].isHit = 1;
 	board[4][1].isHit = 1;
 	printGrid();
 	print(board);
@@ -90,15 +90,11 @@ int main(void)
 				if(buttonState == 0x10 && xCursor < 7)
 				{
 					xPlus();
-					Nokia5110_DisplayBuffer();
 				}
 				if(buttonState == 0x01) 
 				{
-					//if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
+					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
 					fire();
-					print(board);
-					select(board, xCursor, yCursor);
-					Nokia5110_DisplayBuffer();
 					shotsFired++;
 				}
 			}
