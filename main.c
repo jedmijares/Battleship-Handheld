@@ -8,6 +8,9 @@
 #include "tm4c123gh6pm.h"
 #include "squares.h"
 #include "printMatrix.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 //int main(void){
 //	unsigned short xpos = 0;
@@ -25,6 +28,9 @@
 int main(void)
 {
 	int i, j;
+	int shotsFired = 0;
+	int goodShots = 0;
+	char* shotsString;//[sizeof(int)*8+1];
 	Sea board[8][8];
 	short xCursor = 0;
 	short yCursor = 0;
@@ -44,8 +50,8 @@ int main(void)
 		}
 	}
 	board[3][3].isShip = 1;
-	board[3][3].isHit = 1;
-	board[1][0].isHit = 1;
+	//board[3][3].isHit = 1;
+	//board[1][0].isHit = 1;
 	board[1][1].isShip = 1;
 	printGrid();
 	print(board);
@@ -68,10 +74,23 @@ int main(void)
 		}
 		else if(buttons == 0x00)
 		{
+			if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
 			board[xCursor][yCursor].isHit = 1;
 			print(board);
 			delay1ms(250);
+			shotsFired++;
 		}
+//		if (millis() > 3000 && millis() < 4000)
+//		{
+//			Nokia5110_SetCursor(8, 0);
+//			Nokia5110_OutString("13");
+//		}
+		//sprintf(shotsString, "%d", shotsFired);
+		Nokia5110_SetCursor(7,0);
+		Nokia5110_OutUDec(shotsFired);
+		//itoa(shotsFired,shotsString,10);
+		//Nokia5110_OutString(shotsString);
+		
 	}
 }
 
