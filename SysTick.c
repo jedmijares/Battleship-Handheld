@@ -17,17 +17,8 @@ volatile unsigned long ms = 0;
 
 void SysTick_Handler(void)
 {
-	if(ms%400 == 0){
-		if(pushbuttons() == 0x10) 
-			xPlus();
-		else if(pushbuttons() == 0x01) 
-			yPlus();
-		else if(pushbuttons() == 0x00)
-			fire();
-	}
-	if(ms%400 == 0){
+	if(ms%250 == 0){
 		toggle();
-		Nokia5110_DisplayBuffer();
 	}
   ms = ms + 1;
 }
