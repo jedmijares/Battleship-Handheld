@@ -21,9 +21,27 @@
 //  SysTick_Init();
 //  PortF_Init();
 //  Nokia5110_Clear();
-//  
 
+Sea board[8][8];
+short xCursor = 0;
+short yCursor = 0;
 
+void fire(){
+	board[xCursor][yCursor].isHit = 1;
+	print(board);
+	select(board, xCursor, yCursor);
+	Nokia5110_DisplayBuffer();
+}
+void xPlus(){
+	xCursor++;
+	select(board, xCursor, yCursor);
+	Nokia5110_DisplayBuffer();
+}
+void yPlus(){
+	yCursor++;
+	select(board, xCursor, yCursor);
+	Nokia5110_DisplayBuffer();
+}
 
 int main(void)
 {
@@ -56,20 +74,23 @@ int main(void)
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
+	Nokia5110_DisplayBuffer();
 	while(1)
 	{
-		//delay1ms(1000);
+		delay1ms(1000);
 		buttons = pushbuttons();
 		if(buttons == 0x10) 
 		{
 			xCursor++;
 			select(board, xCursor, yCursor);
+			Nokia5110_DisplayBuffer();
 			delay1ms(250);
 		}
 		else if(buttons == 0x01) 
 		{
 			yCursor++;
 			select(board, xCursor, yCursor);
+			Nokia5110_DisplayBuffer();
 			delay1ms(250);
 		}
 		else if(buttons == 0x00)
@@ -77,6 +98,8 @@ int main(void)
 			if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
 			board[xCursor][yCursor].isHit = 1;
 			print(board);
+			select(board, xCursor, yCursor);
+			Nokia5110_DisplayBuffer();
 			delay1ms(250);
 			shotsFired++;
 		}

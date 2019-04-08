@@ -20,6 +20,9 @@
  For more information about my classes, my research, and my books, see
  http://users.ece.utexas.edu/~valvano/
  */
+#ifndef _PLL_h
+#define _PLL_h
+
 
 // The #define statement SYSDIV2 initializes
 // the PLL to the desired frequency.
@@ -161,3 +164,4 @@ SYSDIV2  Divisor  Clock (MHz)
  126      127     3.150
  127      128     3.125
 */
+#endif

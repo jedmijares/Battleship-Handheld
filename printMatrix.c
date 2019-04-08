@@ -4,6 +4,12 @@
 //y starts at 4 and increments by 6
 //text starts at 8,0
 
+
+int xPos=0;
+int yPos=0;
+short tog=1;
+Sea matrix[8][8];
+
 const unsigned char empty[] ={
  0x42, 0x4D, 0x8A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x80,
@@ -118,13 +124,20 @@ const unsigned char hitOutline[] ={
 
 };
 
-
+void matrixIn(Sea in[8][8]){
+	for(int i = 0; i<8; i++){
+		for(int j = 0; j<8; j++){
+			matrix[i][j] = in[i][j];
+		}
+	}
+}
 void printGrid(void){
 	Nokia5110_PrintBMP(0,47,grid,1);
 	Nokia5110_DisplayBuffer();
 }
 
 void print(Sea in[8][8]){
+	matrixIn(in);
 	for(int i = 0; i<8; i++){
 		for(int j = 0; j<8; j++){
 			if(in[i][j].isHit && in[i][j].isShip)
@@ -135,17 +148,54 @@ void print(Sea in[8][8]){
 				Nokia5110_PrintBMP(i*7, j*6+4, empty, 1);
 		}
 	}
-	Nokia5110_DisplayBuffer();
 }
 
 void select(Sea in[8][8], int x, int y){
-	print(in);
+	matrixIn(in);
+	xPos = x;
+	yPos = y;
+	deselect(in, (x-1), (y-1));
+	deselect(in, (x-1), y);
+	deselect(in, x, (y-1));
+	deselect(in, (x+1), (y+1));
+	deselect(in, (x+1), y);
+	deselect(in, x, (y+1));
 	if(in[x][y].isHit && in[x][y].isShip)
 		Nokia5110_PrintBMP(x*7, y*6+4, hitOutline,1);
 	else if(in[x][y].isHit && !in[x][y].isShip)
 		Nokia5110_PrintBMP(x*7, y*6+4, missOutline,1);
 	else
 		Nokia5110_PrintBMP(x*7, y*6+4, outline, 1);
-	Nokia5110_DisplayBuffer();
 }
 
+void deselect(Sea in[8][8], int x, int y){
+	if(y>=0 && x>=0 ){
+		if(in[x][y].isHit && in[x][y].isShip)
+			Nokia5110_PrintBMP(x*7, y*6+4, hit,1);
+		else if(in[x][y].isHit && !in[x][y].isShip)
+			Nokia5110_PrintBMP(x*7, y*6+4, miss,1);
+		else
+			Nokia5110_PrintBMP(x*7, y*6+4, empty, 1);
+	}
+}
+
+void selectShort(Sea in[8][8], int x, int y){
+	if(in[x][y].isHit && in[x][y].isShip)
+		Nokia5110_PrintBMP(x*7, y*6+4, hitOutline,1);
+	else if(in[x][y].isHit && !in[x][y].isShip)
+		Nokia5110_PrintBMP(x*7, y*6+4, missOutline,1);
+	else
+		Nokia5110_PrintBMP(x*7, y*6+4, outline, 1);
+}
+
+
+void toggle(void){
+	if(tog){
+		deselect(matrix, xPos, yPos);
+		tog = 0;
+	}
+	else{
+		selectShort(matrix, xPos, yPos);
+		tog = 1;
+	}
+}
