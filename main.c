@@ -84,6 +84,8 @@ int main(void)
 	board[0][3].isShip = 1;
 	board[0][2].isShip = 1;
 	board[0][1].isShip = 1;
+	board[0][1].isHit = 1;
+	board[4][1].isHit = 1;
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
@@ -99,10 +101,9 @@ int main(void)
 			if (reading != buttonState) // if the reading does not match what the computer thinks the button was last, step in
 			{
 				buttonState = reading;
-				if(buttonState == 0x10)
+				if(buttonState == 0x10 && xCursor < 7)
 				{
-					xCursor++;
-					select(board, xCursor, yCursor);
+					xPlus();
 					Nokia5110_DisplayBuffer();
 				}
 				if(buttonState == 0x01) 
@@ -111,6 +112,7 @@ int main(void)
 					board[xCursor][yCursor].isHit = 1;
 					print(board);
 					select(board, xCursor, yCursor);
+					fire();
 					Nokia5110_DisplayBuffer();
 					shotsFired++;
 				}
@@ -123,8 +125,8 @@ int main(void)
 		Nokia5110_SetCursor(8,0);
 		//Nokia5110_OutUDec(shotsFired);
 		//itoa(shotsFired,shotsString,10);
-		Nokia5110_OutChar((char)shotsFired);
-		
+		//Nokia5110_OutChar((char)shotsFired);
+		Nokia5110_DisplayBuffer();
 	}
 }
 
