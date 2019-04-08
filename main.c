@@ -56,14 +56,9 @@ void yPlus(){
 
 int main(void)
 {		
-	int i, j;
 	int shotsFired = 0;
 	int goodShots = 0;
 	char* shotsString;//[sizeof(int)*8+1];
-	Sea board[8][8];
-	short xCursor = 0;
-	short yCursor = 0;
-	//short buttons = 0x11;
 	short reading; // reading of buttons
 	short buttonState;
 	short oldReading = 0x11; // previous reading of buttons
@@ -75,17 +70,16 @@ int main(void)
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	
-	for(i = 0; i < 8; i++){
-		for(j = 0; j < 8; j++){
+	for(short i = 0; i < 8; i++){
+		for(short j = 0; j < 8; j++){
 			board[i][j].isHit = 0;
 			board[i][j].isShip = 0;
 		}
 	}
+	board[1][1].isShip = 1;
 	board[0][0].isShip = 1;
-	board[0][2].isShip = 1;
-	board[0][1].isShip = 1;
-	board[0][0].isHit = 1;
-	board[4][1].isHit = 1;
+	board[7][0].isHit = 1;
+	board[1][1].isHit = 1;
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
@@ -107,9 +101,9 @@ int main(void)
 				}
 				if(buttonState == 0x01) 
 				{
-					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
+					//if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
 					fire();
-					shotsFired++;
+					//shotsFired++;
 				}
 			}
 			

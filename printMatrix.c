@@ -124,8 +124,8 @@ void printGrid(void){
 }
 
 void print(Sea in[8][8]){
-	for(int i = 0; i<8; i++){
-		for(int j = 0; j<8; j++){
+	for(short i = 0; i<8; i++){
+		for(short j = 0; j<8; j++){
 			if(in[i][j].isHit && in[i][j].isShip)
 				Nokia5110_PrintBMP(i*7, j*6+4, hit,1);				
 			else if(in[i][j].isHit && !in[i][j].isShip)
@@ -136,28 +136,29 @@ void print(Sea in[8][8]){
 	}
 }
 
-void select(Sea in[8][8], int x, int y){
-	deselect(in, (x-1), (y-1));
-	deselect(in, (x-1), y);
-	deselect(in, x, (y-1));
-	deselect(in, (x+1), (y+1));
-	deselect(in, (x+1), y);
-	deselect(in, x, (y+1));
-	if(in[x][y].isHit && in[x][y].isShip)
-		Nokia5110_PrintBMP(x*7, y*6+4, hitOutline,1);
-	else if(in[x][y].isHit && !in[x][y].isShip)
-		Nokia5110_PrintBMP(x*7, y*6+4, missOutline,1);
+void select(Sea in[8][8], short i, short j){
+	deselect(in, i+1, j);
+	deselect(in, i, j+1);
+	deselect(in, i-1, j);
+	deselect(in, i, j-1);
+	if(in[i][j].isHit && in[i][j].isShip)
+		Nokia5110_PrintBMP(i*7, j*6+4, hitOutline,1);				
+	else if(in[i][j].isHit && !in[i][j].isShip)
+		Nokia5110_PrintBMP(i*7, j*6+4, missOutline,1);
 	else
-		Nokia5110_PrintBMP(x*7, y*6+4, outline, 1);
+		Nokia5110_PrintBMP(i*7, j*6+4, outline, 1);
 }
 
-void deselect(Sea in[8][8], int x, int y){
-	if(y>=0 && x>=0 && x<=7 && y <=7){
-		if(in[x][y].isHit && in[x][y].isShip)
-			Nokia5110_PrintBMP(x*7, y*6+4, hit,1);
-		else if(in[x][y].isHit && !in[x][y].isShip)
-			Nokia5110_PrintBMP(x*7, y*6+4, miss,1);
-		else
-			Nokia5110_PrintBMP(x*7, y*6+4, empty, 1);
+void deselect(Sea in[8][8], short i, short j){
+	if(i>=0 && j>=0){
+		if(i<=7 && j<=7){
+			if(in[i][j].isHit && in[i][j].isShip)
+				Nokia5110_PrintBMP(i*7, j*6+4, hit,1);				
+			else if(in[i][j].isHit && !in[i][j].isShip)
+				Nokia5110_PrintBMP(i*7, j*6+4, miss,1);
+			else
+				Nokia5110_PrintBMP(i*7, j*6+4, empty, 1);
+		}
 	}
 }
+	
