@@ -42,27 +42,26 @@ void yPlus(){
 }
 
 int main(void)
-{		
-	int i, j;
+{	
 	int shotsFired = 0;
 	int goodShots = 0;
 	//char* shotsString;//[sizeof(int)*8+1];
 	Sea board[8][8];
-	short xCursor = 0;
-	short yCursor = 0;
 	short reading; // reading of buttons
 	short buttonState;
 	short oldReading = 0x11; // previous reading of buttons
 	unsigned long lastDebounceTime = 0;
 	unsigned long debounceDelay = 50; // time to wait before more button input
+	const int SHOTSNEEDED = 2; // total squares that are ships
+	short won = 0; // 1 if game is won
 	
 	PLL_Init();
 	PortF_Init();
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	
-	for(i = 0; i < 8; i++){
-		for(j = 0; j < 8; j++){
+	for(int i = 0; i < 8; i++){
+		for(int j = 0; j < 8; j++){
 			board[i][j].isHit = 0;
 			board[i][j].isShip = 0;
 		}
@@ -70,7 +69,7 @@ int main(void)
 	board[0][0].isShip = 1;
 	board[0][2].isShip = 1;
 	board[0][1].isShip = 1;
-	board[0][0].isHit = 1;
+	//board[0][0].isHit = 1;
 	board[4][1].isHit = 1;
 	printGrid();
 	print(board);
@@ -78,6 +77,8 @@ int main(void)
 	Nokia5110_SetCursor(8,0);
 	Nokia5110_OutChar('0');
 	Nokia5110_DisplayBuffer();
+	
+	
 	while(1)
 	{
 		reading = pushbuttons(); // read value of buttons
@@ -96,17 +97,23 @@ int main(void)
 					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
 					fire();
 					shotsFired++;
+					print(board);
 				}
 			}
-			
+		}
+		
+		if((goodShots >= SHOTSNEEDED) && (won == 0)) // if you won
+		{
+			Nokia5110_SetCursor(8,2);
+			Nokia5110_OutChar('W');
+			//won = 1;
 		}
 		
 		oldReading = reading; // for button debouncing
 		//sprintf(shotsString, "%d", shotsFired);
-		Nokia5110_SetCursor(8,0);
-		//Nokia5110_OutUDec(shotsFired);
-		//itoa(shotsFired,shotsString,10);
+		Nokia5110_SetCursor(7,0);
+		Nokia5110_OutUDec(shotsFired);
 		//Nokia5110_OutChar((char)shotsFired);
-		Nokia5110_DisplayBuffer();
+		if (millis()%4 == 1) Nokia5110_DisplayBuffer();
 	}
 }
