@@ -447,6 +447,16 @@
               <FileType>5</FileType>
               <FilePath>.\squares.h</FilePath>
             </File>
+            <File>
+              <FileName>PortB.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\PortB.h</FilePath>
+            </File>
+            <File>
+              <FileName>PortB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\PortB.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
