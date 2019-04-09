@@ -48,7 +48,7 @@ int main(void)
 {	
 	int shotsFired = 0;
 	int goodShots = 0; // number of successful hits against ships
-	char* shotsString;//[sizeof(int)*8+1];
+	//char* shotsString;//[sizeof(int)*8+1];
 	short reading; // reading of buttons
 	short buttonState; // actually used to check input
 	short oldReading = 0x11; // previous reading of buttons
@@ -89,6 +89,7 @@ int main(void)
 				{
 					xPlus();
 					Nokia5110_DisplayBuffer();
+					beep(50);
 				}
 				if(buttonState == 0x01) 
 				{
@@ -100,6 +101,7 @@ int main(void)
 					fire();
 					shotsFired++;
 					Nokia5110_DisplayBuffer();
+					beep(50);
 				}
 			}
 		}

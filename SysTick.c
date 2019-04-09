@@ -13,10 +13,21 @@ void SysTick_Init(unsigned long period){
 }
 
 volatile unsigned long ms = 0;
+int beepTime = 0; // ms long to beep
 
 void SysTick_Handler(void)
 {
   ms = ms + 1;
+	if(beepTime > 0)
+	{
+		if(ms % 4 == 0)redToggle();
+		beepTime--;
+	}
+}
+
+void beep(int time)
+{
+	beepTime = time;
 }
 
 unsigned long millis(void) {return ms;}
