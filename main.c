@@ -44,18 +44,6 @@ void yPlus(){
 	select(board, xCursor, yCursor);
 }
 
-//int main(void)
-//{
-//	PLL_Init(); // set clock to 80 MHz
-//	PortF_Init();
-//	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
-//	Nokia5110_Init();
-//	while(1)
-//	{
-//		WaitForInterrupt();
-//	}
-//}
-
 int main(void)
 {		
 	int shotsFired = 0;
