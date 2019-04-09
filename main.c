@@ -54,7 +54,7 @@ int main(void)
 	short oldReading = 0x11; // previous reading of buttons
 	unsigned long lastDebounceTime = 0; 
 	unsigned long debounceDelay = 50; // time to wait before more button input
-	const short SHOTSNEEDED = 3;
+	const short SHOTSNEEDED = 3; // shots needed to win game
 	
 	PLL_Init(); // set clock to 80 MHz
 	PortF_Init();
