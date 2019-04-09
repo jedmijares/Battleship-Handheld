@@ -8,6 +8,9 @@
 #include "tm4c123gh6pm.h"
 #include "squares.h"
 #include "printMatrix.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 Sea board[8][8];
 short xCursor = 0;
@@ -44,18 +47,16 @@ void yPlus(){
 int main(void)
 {	
 	int shotsFired = 0;
-	int goodShots = 0;
-	//char* shotsString;//[sizeof(int)*8+1];
-	Sea board[8][8];
+	int goodShots = 0; // number of successful hits against ships
+	char* shotsString;//[sizeof(int)*8+1];
 	short reading; // reading of buttons
-	short buttonState;
+	short buttonState; // actually used to check input
 	short oldReading = 0x11; // previous reading of buttons
-	unsigned long lastDebounceTime = 0;
+	unsigned long lastDebounceTime = 0; 
 	unsigned long debounceDelay = 50; // time to wait before more button input
-	const int SHOTSNEEDED = 2; // total squares that are ships
-	short won = 0; // 1 if game is won
+	const short SHOTSNEEDED = 3; // shots needed to win game
 	
-	PLL_Init();
+	PLL_Init(); // set clock to 80 MHz
 	PortF_Init();
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
@@ -66,17 +67,12 @@ int main(void)
 			board[i][j].isShip = 0;
 		}
 	}
-	board[1][1].isShip = 1;
 	board[0][0].isShip = 1;
-	board[0][2].isShip = 1;
-	board[0][1].isShip = 1;
-	//board[0][0].isHit = 1;
-	board[4][1].isHit = 1;
+	board[1][0].isShip = 1;
+	board[2][0].isShip = 1;
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
-	Nokia5110_SetCursor(8,0);
-	Nokia5110_OutChar('0');
 	Nokia5110_DisplayBuffer();
 	
 	
@@ -92,28 +88,32 @@ int main(void)
 				if(buttonState == 0x10 && xCursor < 7)
 				{
 					xPlus();
+					Nokia5110_DisplayBuffer();
 				}
 				if(buttonState == 0x01) 
 				{
-					//if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) goodShots++;
+					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) 
+					{
+						goodShots++;
+						
+					}
 					fire();
-					//shotsFired++;
+					shotsFired++;
+					Nokia5110_DisplayBuffer();
 				}
 			}
 		}
+		oldReading = reading;
 		
-		if((goodShots >= SHOTSNEEDED) && (won == 0)) // if you won
+		Nokia5110_SetCursor(7,3);
+		Nokia5110_OutUDec(shotsFired);
+		Nokia5110_SetCursor(7,4);
+		Nokia5110_OutUDec(goodShots);
+		if(goodShots >= SHOTSNEEDED)
 		{
 			Nokia5110_SetCursor(8,2);
 			Nokia5110_OutChar('W');
-			//won = 1;
 		}
-		
-		oldReading = reading; // for button debouncing
-		//sprintf(shotsString, "%d", shotsFired);
-		Nokia5110_SetCursor(7,0);
-		Nokia5110_OutUDec(shotsFired);
-		//Nokia5110_OutChar((char)shotsFired);
-		if (millis()%4 == 1) Nokia5110_DisplayBuffer();
 	}
 }
+ 
