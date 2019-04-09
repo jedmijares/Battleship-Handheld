@@ -16,22 +16,21 @@ void SysTick_Init(unsigned long period){
 }
 
 volatile unsigned long ms = 0;
+int beepTime = 0; // ms long to beep
 
 void SysTick_Handler(void)
 {
-//	if(ms%400 == 0){
-//		if(pushbuttons() == 0x10) 
-//			xPlus();
-//		else if(pushbuttons() == 0x01) 
-//			yPlus();
-//		else if(pushbuttons() == 0x00)
-//			fire();
-//	}
-//	if(ms%400 == 0){
-//		toggle();
-//		Nokia5110_DisplayBuffer();
-//	}
   ms = ms + 1;
+	if(beepTime > 0)
+	{
+		if(ms % 4 == 0)redToggle();
+		beepTime--;
+	}
+}
+
+void beep(int time)
+{
+	beepTime = time;
 }
 
 unsigned long millis(void) {return ms;}

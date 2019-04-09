@@ -8,6 +8,7 @@ void SysTick_Handler(void);
 unsigned long millis(void);
 //void SysTick_Delay10ms(void);
 void delay1ms(int ms);
+void beep(int time);
 
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
