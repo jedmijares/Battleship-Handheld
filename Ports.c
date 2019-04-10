@@ -8,9 +8,14 @@
 #define GLED (*((volatile unsigned long *)0x40025020))
 #define BLED (*((volatile unsigned long *)0x40025010))
 #define BUZZER (*((volatile unsigned long *)0x40004040)) // PA4
+	
 #define BBUTTONS (*((volatile unsigned long *)0x400053CC)) // B 0 1 4 5 6 7
 #define RIGHT (*((volatile unsigned long *)0x40005200)) // B7
 #define DOWN (*((volatile unsigned long *)0x40005100)) // B6
+#define SELECT (*((volatile unsigned long *)0x40005004)) // B0
+#define LEFT (*((volatile unsigned long *)0x40005080)) // B5
+#define UP (*((volatile unsigned long *)0x40005040)) // B4
+
 
 void Ports_Init(void){
 	//Initialize PF3, PF2, and PF1 as outputs
@@ -52,6 +57,9 @@ void buzzerToggle(void) // toggles A4
 short readBButtons(void) {return (BBUTTONS & 0xF3);}
 short downPressed(void) {return (DOWN & 0x40);}
 short rightPressed(void) {return (RIGHT & 0x80);}
+short selectPressed(void) {return (SELECT & 0x01);}
+short upPressed(void) {return (UP & 0x10);}
+short leftPressed(void) {return (LEFT & 0x20);}
 
 uint32_t pushbuttons(void){
 	//Return the state of the PortF buttons

@@ -41,6 +41,16 @@ void yPlus(){
 	checkBounds(&xCursor, &yCursor);
 	select(board, xCursor, yCursor);
 }
+void xMinus(){
+	xCursor--;
+	checkBounds(&xCursor, &yCursor);
+	select(board, xCursor, yCursor);
+}
+void yMinus(){
+	yCursor--;
+	checkBounds(&xCursor, &yCursor);
+	select(board, xCursor, yCursor);
+}
 
 int main(void)
 {	
@@ -83,19 +93,31 @@ int main(void)
 			if (reading != buttonState) // if the reading does not match what the computer thinks the button was last, step in
 			{
 				buttonState = reading;
-				if(rightPressed() && xCursor < 7)//buttonState == 0x10 && xCursor < 7)
+				if(rightPressed() && xCursor < 7)
 				{
 					xPlus();
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
-				if(downPressed() && yCursor < 7)//buttonState == 0x10 && xCursor < 7)
+				if(downPressed() && yCursor < 7)
 				{
 					yPlus();
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
-				if(buttonState == 0x01) 
+				if(leftPressed() && xCursor >0)
+				{
+					xMinus();
+					Nokia5110_DisplayBuffer();
+					beep(50);
+				}
+				if(upPressed() && yCursor > 0)
+				{
+					yMinus();
+					Nokia5110_DisplayBuffer();
+					beep(50);
+				}
+				if(selectPressed()) 
 				{
 					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) 
 					{

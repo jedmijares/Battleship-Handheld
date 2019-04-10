@@ -20,4 +20,5 @@ void buzzerToggle(void);
 short downPressed(void);
 short rightPressed(void);
 short readBButtons(void);
+short selectPressed(void);
 #endif
