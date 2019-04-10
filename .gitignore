@@ -59,3 +59,5 @@ Listings/
 *.scvd
 *.s#*
 *.b#*
+*.pro
+*.job
