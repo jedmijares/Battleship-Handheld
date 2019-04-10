@@ -17,4 +17,7 @@ void blueToggle(void);
 void redToggle(void);
 void greenToggle(void);
 void buzzerToggle(void);
+short downPressed(void);
+short rightPressed(void);
+short readBButtons(void);
 #endif

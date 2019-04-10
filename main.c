@@ -13,6 +13,7 @@ Sea board[8][8];
 short xCursor = 0;
 short yCursor = 0;
 
+
 void checkBounds(short *x , short *y){
 	if(*x > 7)
 		*x = 7;
@@ -45,12 +46,13 @@ int main(void)
 {	
 	int shotsFired = 0;
 	int goodShots = 0; // number of successful hits against ships
-	short reading; // reading of buttons
+
 	short buttonState; // actually used to check input
 	short oldReading = 0x11; // previous reading of buttons
 	unsigned long lastDebounceTime = 0; 
 	unsigned long debounceDelay = 50; // time to wait before more button input
 	const short SHOTSNEEDED = 3; // shots needed to win game
+	short reading; // reading of buttons
 	
 	PLL_Init(); // set clock to 80 MHz
 	Ports_Init();
@@ -74,16 +76,22 @@ int main(void)
 	
 	while(1)
 	{
-		reading = pushbuttons(); // read value of buttons
+		reading = readBButtons();//pushbuttons(); // read value of buttons
 		if(reading != oldReading ) lastDebounceTime = millis(); // if reading does not match last value, we're still bouncing
 		if((millis() - lastDebounceTime) > debounceDelay) // if the time since the last bounce is greater than the delay, step in
 		{
 			if (reading != buttonState) // if the reading does not match what the computer thinks the button was last, step in
 			{
 				buttonState = reading;
-				if(buttonState == 0x10 && xCursor < 7)
+				if(rightPressed() && xCursor < 7)//buttonState == 0x10 && xCursor < 7)
 				{
 					xPlus();
+					Nokia5110_DisplayBuffer();
+					beep(50);
+				}
+				if(downPressed() && yCursor < 7)//buttonState == 0x10 && xCursor < 7)
+				{
+					yPlus();
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
@@ -92,7 +100,6 @@ int main(void)
 					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) 
 					{
 						goodShots++;
-						
 					}
 					fire();
 					shotsFired++;
