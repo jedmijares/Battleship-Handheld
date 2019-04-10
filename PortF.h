@@ -3,7 +3,7 @@
 
 #include "stdint.h"
 
-void PortF_Init(void);
+void Ports_Init(void);
 uint32_t pushbuttons(void);
 void redOn(void);
 void redOff(void);
@@ -14,4 +14,5 @@ void greenOff(void);
 void blueToggle(void);
 void redToggle(void);
 void greenToggle(void);
+void buzzerToggle(void);
 #endif

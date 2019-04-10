@@ -57,7 +57,7 @@ int main(void)
 	const short SHOTSNEEDED = 3; // shots needed to win game
 	
 	PLL_Init(); // set clock to 80 MHz
-	PortF_Init();
+	Ports_Init();
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	

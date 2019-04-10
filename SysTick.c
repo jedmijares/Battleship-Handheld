@@ -1,6 +1,7 @@
 #include "SysTick.h"
 #include "tm4c123gh6pm.h"
 #include "stdint.h"
+#include "PortF.h"
 
 void SysTick_Init(unsigned long period){
   NVIC_ST_CTRL_R = 0;         // disable SysTick during setup
@@ -20,7 +21,7 @@ void SysTick_Handler(void)
   ms = ms + 1;
 	if(beepTime > 0)
 	{
-		if(ms % 4 == 0)redToggle();
+		if(ms % 4 == 0) buzzerToggle();
 		beepTime--;
 	}
 }
