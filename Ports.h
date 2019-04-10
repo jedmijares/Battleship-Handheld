@@ -1,5 +1,7 @@
-#ifndef _PortF_h
-#define _PortF_h
+// allows interaction with GPIO pins
+
+#ifndef _Ports_h
+#define _Ports_h
 
 #include "stdint.h"
 

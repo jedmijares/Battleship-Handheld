@@ -388,11 +388,6 @@
               <FilePath>.\PLL.c</FilePath>
             </File>
             <File>
-              <FileName>PortF.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\PortF.c</FilePath>
-            </File>
-            <File>
               <FileName>SysTick.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\SysTick.c</FilePath>
@@ -401,11 +396,6 @@
               <FileName>PLL.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\PLL.h</FilePath>
-            </File>
-            <File>
-              <FileName>PortF.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\PortF.h</FilePath>
             </File>
             <File>
               <FileName>startup.s</FileName>
@@ -448,14 +438,14 @@
               <FilePath>.\squares.h</FilePath>
             </File>
             <File>
-              <FileName>PortB.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\PortB.h</FilePath>
+              <FileName>Ports.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Ports.c</FilePath>
             </File>
             <File>
-              <FileName>PortB.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\PortB.c</FilePath>
+              <FileName>Ports.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Ports.h</FilePath>
             </File>
           </Files>
         </Group>
