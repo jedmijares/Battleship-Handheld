@@ -3,7 +3,7 @@
 <eagle version="9.2.0">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
@@ -2006,6 +2006,12 @@ design rules under a new name.</description>
 <element name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0207/10" package3d_urn="urn:adsk.eagle:package:23491/1" value="330" x="19.05" y="10.16" rot="R90">
 <attribute name="SPICEPREFIX" value="R" x="19.05" y="10.16" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
+<element name="SJ3" library="jumper" library_urn="urn:adsk.eagle:library:252" package="SJ" package3d_urn="urn:adsk.eagle:package:15471/1" value="" x="17.78" y="19.05">
+<attribute name="VALUE" x="18.1801" y="19.05" size="0.02" layer="27"/>
+</element>
+<element name="SJ4" library="jumper" library_urn="urn:adsk.eagle:library:252" package="SJ" package3d_urn="urn:adsk.eagle:package:15471/1" value="" x="15.24" y="10.16" rot="R270">
+<attribute name="VALUE" x="15.24" y="9.7599" size="0.02" layer="27" rot="R270"/>
+</element>
 </elements>
 <signals>
 <signal name="LEFTSIG">
@@ -2086,6 +2092,7 @@ design rules under a new name.</description>
 <via x="6.35" y="11.43" extent="1-16" drill="0.4064"/>
 <via x="111.76" y="49.53" extent="1-16" drill="0.4064"/>
 <via x="7.62" y="69.85" extent="1-16" drill="0.4064"/>
+<contactref element="SJ3" pad="1"/>
 </signal>
 <signal name="N$21">
 <contactref element="IC1" pad="21"/>
@@ -2421,6 +2428,9 @@ design rules under a new name.</description>
 <wire x1="19.5" y1="5.5" x2="19.05" y2="5.08" width="1.143" layer="1"/>
 <wire x1="20.5" y1="6.5" x2="20.5" y2="8.562" width="1.143" layer="1"/>
 <wire x1="20.5" y1="8.562" x2="22.098" y2="10.16" width="1.143" layer="1"/>
+<contactref element="SJ4" pad="2"/>
+<wire x1="15.24" y1="9.398" x2="19.05" y2="5.588" width="1.143" layer="1"/>
+<wire x1="19.05" y1="5.588" x2="19.05" y2="5.08" width="1.143" layer="1"/>
 </signal>
 <signal name="RX">
 <contactref element="X1" pad="2"/>
@@ -2611,10 +2621,10 @@ design rules under a new name.</description>
 <contactref element="IC1" pad="19"/>
 <contactref element="JP5" pad="4"/>
 <contactref element="JP5" pad="3"/>
-<wire x1="29.21" y1="6.35" x2="31.75" y2="6.35" width="0.4064" layer="1"/>
-<wire x1="31.75" y1="6.35" x2="37.14" y2="6.35" width="0.4064" layer="1"/>
 <contactref element="SJ2" pad="1"/>
-<wire x1="29.21" y1="6.35" x2="23.622" y2="6.35" width="0.4064" layer="1"/>
+<wire x1="23.622" y1="6.35" x2="29.21" y2="6.35" width="1.143" layer="1"/>
+<wire x1="29.21" y1="6.35" x2="31.75" y2="6.35" width="1.143" layer="1"/>
+<wire x1="31.75" y1="6.35" x2="37.14" y2="6.35" width="1.143" layer="1"/>
 </signal>
 <signal name="N$36">
 <contactref element="IC1" pad="28"/>
@@ -2722,6 +2732,12 @@ design rules under a new name.</description>
 <via x="22.5" y="27.5" extent="1-16" drill="0.35"/>
 <wire x1="22.5" y1="27.5" x2="22.5" y2="18.69" width="1.143" layer="1"/>
 <wire x1="22.5" y1="18.69" x2="19.05" y2="15.24" width="1.143" layer="1"/>
+<contactref element="SJ3" pad="2"/>
+<contactref element="SJ4" pad="1"/>
+<wire x1="15.24" y1="10.922" x2="19.05" y2="14.732" width="1.143" layer="1"/>
+<wire x1="19.05" y1="14.732" x2="19.05" y2="15.24" width="1.143" layer="1"/>
+<wire x1="18.542" y1="19.05" x2="19.05" y2="18.542" width="1.143" layer="1"/>
+<wire x1="19.05" y1="18.542" x2="19.05" y2="15.24" width="1.143" layer="1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
