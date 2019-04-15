@@ -3,18 +3,16 @@
 
 #include "Nokia5110.h"
 #include "PLL.h"
-#include "PortF.h"
+#include "Ports.h"
 #include "SysTick.h"
 #include "tm4c123gh6pm.h"
 #include "squares.h"
 #include "printMatrix.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 
 Sea board[8][8];
 short xCursor = 0;
 short yCursor = 0;
+
 
 void checkBounds(short *x , short *y){
 	if(*x > 7)
@@ -43,21 +41,31 @@ void yPlus(){
 	checkBounds(&xCursor, &yCursor);
 	select(board, xCursor, yCursor);
 }
+void xMinus(){
+	xCursor--;
+	checkBounds(&xCursor, &yCursor);
+	select(board, xCursor, yCursor);
+}
+void yMinus(){
+	yCursor--;
+	checkBounds(&xCursor, &yCursor);
+	select(board, xCursor, yCursor);
+}
 
 int main(void)
-{		
+{	
 	int shotsFired = 0;
 	int goodShots = 0; // number of successful hits against ships
-	//char* shotsString;//[sizeof(int)*8+1];
-	short reading; // reading of buttons
+
 	short buttonState; // actually used to check input
 	short oldReading = 0x11; // previous reading of buttons
 	unsigned long lastDebounceTime = 0; 
 	unsigned long debounceDelay = 50; // time to wait before more button input
 	const short SHOTSNEEDED = 3; // shots needed to win game
+	short reading; // reading of buttons
 	
 	PLL_Init(); // set clock to 80 MHz
-	PortF_Init();
+	Ports_Init();
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	
@@ -74,27 +82,46 @@ int main(void)
 	print(board);
 	select(board, xCursor, yCursor);
 	Nokia5110_DisplayBuffer();
+	
+	
 	while(1)
 	{
-		reading = pushbuttons(); // read value of buttons
+		reading = readBButtons();//pushbuttons(); // read value of buttons
 		if(reading != oldReading ) lastDebounceTime = millis(); // if reading does not match last value, we're still bouncing
 		if((millis() - lastDebounceTime) > debounceDelay) // if the time since the last bounce is greater than the delay, step in
 		{
 			if (reading != buttonState) // if the reading does not match what the computer thinks the button was last, step in
 			{
 				buttonState = reading;
-				if(buttonState == 0x10 && xCursor < 7)
+				if(rightPressed() && xCursor < 7)
 				{
 					xPlus();
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
-				if(buttonState == 0x01) 
+				if(downPressed() && yCursor < 7)
+				{
+					yPlus();
+					Nokia5110_DisplayBuffer();
+					beep(50);
+				}
+				if(leftPressed() && xCursor >0)
+				{
+					xMinus();
+					Nokia5110_DisplayBuffer();
+					beep(50);
+				}
+				if(upPressed() && yCursor > 0)
+				{
+					yMinus();
+					Nokia5110_DisplayBuffer();
+					beep(50);
+				}
+				if(selectPressed()) 
 				{
 					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) 
 					{
 						goodShots++;
-						
 					}
 					fire();
 					shotsFired++;

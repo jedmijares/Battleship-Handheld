@@ -1,9 +1,7 @@
 #include "SysTick.h"
 #include "tm4c123gh6pm.h"
 #include "stdint.h"
-#include "Nokia5110.h"
-#include "PortF.h"
-#include "printMatrix.h"
+#include "Ports.h"
 
 void SysTick_Init(unsigned long period){
   NVIC_ST_CTRL_R = 0;         // disable SysTick during setup
@@ -12,7 +10,7 @@ void SysTick_Init(unsigned long period){
   NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x00FFFFFF)|0x40000000; // priority 2
                               // enable SysTick with core clock and interrupts
   NVIC_ST_CTRL_R = 0x07;
-  EnableInterrupts();
+  //EnableInterrupts();
 }
 
 volatile unsigned long ms = 0;
@@ -23,7 +21,7 @@ void SysTick_Handler(void)
   ms = ms + 1;
 	if(beepTime > 0)
 	{
-		if(ms % 4 == 0)redToggle();
+		if(ms % 4 == 0) buzzerToggle();
 		beepTime--;
 	}
 }

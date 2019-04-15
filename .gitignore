@@ -56,3 +56,8 @@ dkms.conf
 Objects/
 Listings/
 *.uvguix.*
+*.scvd
+*.s#*
+*.b#*
+*.pro
+*.job

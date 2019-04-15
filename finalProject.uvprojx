@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>ARMCM4</Device>
           <Vendor>ARM</Vendor>
-          <PackID>ARM.CMSIS.5.5.1</PackID>
+          <PackID>ARM.CMSIS.5.4.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IROM(0x00000000,0x00040000) CPUTYPE("Cortex-M4") CLOCK(12000000) ESEL ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -388,11 +388,6 @@
               <FilePath>.\PLL.c</FilePath>
             </File>
             <File>
-              <FileName>PortF.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\PortF.c</FilePath>
-            </File>
-            <File>
               <FileName>SysTick.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\SysTick.c</FilePath>
@@ -401,11 +396,6 @@
               <FileName>PLL.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\PLL.h</FilePath>
-            </File>
-            <File>
-              <FileName>PortF.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\PortF.h</FilePath>
             </File>
             <File>
               <FileName>startup.s</FileName>
@@ -446,6 +436,16 @@
               <FileName>squares.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\squares.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ports.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Ports.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ports.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Ports.h</FilePath>
             </File>
           </Files>
         </Group>
