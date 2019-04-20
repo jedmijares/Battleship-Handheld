@@ -447,6 +447,21 @@
               <FileType>5</FileType>
               <FilePath>.\Ports.h</FilePath>
             </File>
+            <File>
+              <FileName>Nokia5110.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Nokia5110.h</FilePath>
+            </File>
+            <File>
+              <FileName>random.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\random.h</FilePath>
+            </File>
+            <File>
+              <FileName>random.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\random.s</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

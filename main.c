@@ -8,6 +8,7 @@
 #include "tm4c123gh6pm.h"
 #include "squares.h"
 #include "printMatrix.h"
+#include "random.h"
 
 Sea board[8][8];
 short xCursor = 0;
@@ -68,6 +69,7 @@ int main(void)
 	Ports_Init();
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
+	Random_Init(NVIC_ST_CURRENT_R);
 	
 	for(short i = 0; i < 8; i++){
 		for(short j = 0; j < 8; j++){
@@ -86,7 +88,7 @@ int main(void)
 	
 	while(1)
 	{
-		reading = readBButtons();//pushbuttons(); // read value of buttons
+		reading = readBButtons(); // read value of buttons
 		if(reading != oldReading ) lastDebounceTime = millis(); // if reading does not match last value, we're still bouncing
 		if((millis() - lastDebounceTime) > debounceDelay) // if the time since the last bounce is greater than the delay, step in
 		{
@@ -132,14 +134,18 @@ int main(void)
 		}
 		oldReading = reading;
 		
-		Nokia5110_SetCursor(7,3);
-		Nokia5110_OutUDec(shotsFired);
-		Nokia5110_SetCursor(7,4);
-		Nokia5110_OutUDec(goodShots);
+		Nokia5110_SetCursor(8,2);
+		Nokia5110_OutString("Hits");
+		Nokia5110_SetCursor(8,4);
+		Nokia5110_OutString("Miss");
+		Nokia5110_SetCursor(8,3);
+		Nokia5110_OutUDec2(shotsFired); // modified version of OutUDec that doesn't add space
+		Nokia5110_SetCursor(8,5);
+		Nokia5110_OutUDec2(goodShots);
 		if(goodShots >= SHOTSNEEDED)
 		{
-			Nokia5110_SetCursor(8,2);
-			Nokia5110_OutChar('W');
+			Nokia5110_SetCursor(8,1);
+			Nokia5110_OutString("WIN");
 		}
 	}
 }
