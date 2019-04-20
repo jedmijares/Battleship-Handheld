@@ -21,4 +21,6 @@ short downPressed(void);
 short rightPressed(void);
 short readBButtons(void);
 short selectPressed(void);
+short leftPressed(void);
+short upPressed(void);
 #endif
