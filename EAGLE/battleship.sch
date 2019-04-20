@@ -5889,6 +5889,7 @@ Grid 5.00 mm&lt;p&gt;
 <part name="SJ3" library="jumper" library_urn="urn:adsk.eagle:library:252" deviceset="SJ" device="" package3d_urn="urn:adsk.eagle:package:15471/1"/>
 <part name="SJ4" library="jumper" library_urn="urn:adsk.eagle:library:252" deviceset="SJ" device="" package3d_urn="urn:adsk.eagle:package:15471/1"/>
 <part name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="0207/10" package3d_urn="urn:adsk.eagle:package:23491/1" value="330"/>
+<part name="JP6" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X10" device="" package3d_urn="urn:adsk.eagle:package:22405/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -6024,6 +6025,10 @@ Grid 5.00 mm&lt;p&gt;
 <instance part="R7" gate="G$1" x="127" y="63.5">
 <attribute name="NAME" x="123.19" y="64.9986" size="1.778" layer="95"/>
 <attribute name="VALUE" x="123.19" y="60.198" size="1.778" layer="96"/>
+</instance>
+<instance part="JP6" gate="A" x="218.44" y="12.7">
+<attribute name="NAME" x="212.09" y="26.035" size="1.778" layer="95"/>
+<attribute name="VALUE" x="212.09" y="-5.08" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -6971,6 +6976,76 @@ Grid 5.00 mm&lt;p&gt;
 <wire x1="149.86" y1="60.96" x2="137.16" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="63.5" x2="137.16" y2="60.96" width="0.1524" layer="91"/>
 <junction x="137.16" y="63.5"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="1"/>
+<pinref part="JP6" gate="A" pin="2"/>
+<wire x1="215.9" y1="22.86" x2="223.52" y2="22.86" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$2" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="4"/>
+<pinref part="JP6" gate="A" pin="3"/>
+<wire x1="223.52" y1="20.32" x2="215.9" y2="20.32" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="5"/>
+<pinref part="JP6" gate="A" pin="6"/>
+<wire x1="215.9" y1="17.78" x2="223.52" y2="17.78" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="8"/>
+<pinref part="JP6" gate="A" pin="7"/>
+<wire x1="223.52" y1="15.24" x2="215.9" y2="15.24" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$5" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="9"/>
+<pinref part="JP6" gate="A" pin="10"/>
+<wire x1="215.9" y1="12.7" x2="223.52" y2="12.7" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="12"/>
+<pinref part="JP6" gate="A" pin="11"/>
+<wire x1="223.52" y1="10.16" x2="215.9" y2="10.16" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="13"/>
+<pinref part="JP6" gate="A" pin="14"/>
+<wire x1="215.9" y1="7.62" x2="223.52" y2="7.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$9" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="16"/>
+<pinref part="JP6" gate="A" pin="15"/>
+<wire x1="223.52" y1="5.08" x2="215.9" y2="5.08" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$10" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="19"/>
+<pinref part="JP6" gate="A" pin="20"/>
+<wire x1="215.9" y1="0" x2="223.52" y2="0" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$11" class="0">
+<segment>
+<pinref part="JP6" gate="A" pin="18"/>
+<pinref part="JP6" gate="A" pin="17"/>
+<wire x1="223.52" y1="2.54" x2="215.9" y2="2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
