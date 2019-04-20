@@ -215,6 +215,14 @@ void Nokia5110_OutString(char *ptr);
 // assumes: LCD is in default horizontal addressing mode (V = 0)
 void Nokia5110_OutUDec(unsigned short n);
 
+//********Nokia5110_OutUDec2*****************
+// Output a 16-bit number in unsigned decimal format with a
+// fixed size of five right-justified digits of output.
+// Inputs: n  16-bit unsigned number
+// Outputs: none
+// assumes: LCD is in default horizontal addressing mode (V = 0)
+void Nokia5110_OutUDec2(unsigned short n);
+
 //********Nokia5110_SetCursor*****************
 // Move the cursor to the desired X- and Y-position.  The
 // next character will be printed here.  X=0 is the leftmost
