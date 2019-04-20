@@ -63,34 +63,52 @@ int main(void)
 	short oldReading = 0x11; // previous reading of buttons
 	unsigned long lastDebounceTime = 0; 
 	unsigned long debounceDelay = 50; // time to wait before more button input
-	const short SHOTSNEEDED = 3; // shots needed to win game
+	const short SHOTSNEEDED = 2; // shots needed to win game
 	short reading; // reading of buttons
 	
 	PLL_Init(); // set clock to 80 MHz
 	Ports_Init();
-	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
+	SysTick_Init(80000); // interrupt every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	
-	for(short i = 0; i < 8; i++){
+	for(short i = 0; i < 8; i++){  // reset board
 		for(short j = 0; j < 8; j++){
 			board[i][j].isHit = 0;
 			board[i][j].isShip = 0;
 		}
 	}
 	
-	Random_Init(876445);
+	Nokia5110_Clear();
+	Nokia5110_SetCursor(1,1);
+	Nokia5110_OutString("Jed");
+	Nokia5110_SetCursor(2,2);
+	Nokia5110_OutString("M.");
+	
+	Nokia5110_SetCursor(6,1);
+	Nokia5110_OutString("Jacob");
+	Nokia5110_SetCursor(8,2);
+	Nokia5110_OutString("C.");
+	
+	Nokia5110_SetCursor(3,3);
+	Nokia5110_OutString("Present");
+	Nokia5110_SetCursor(1,4);
+	Nokia5110_OutString("Battleship");
+	
+	//delay1ms(2000);
+	while(!readBButtons()) {}
+	Nokia5110_Clear();
+	
+	Random_Init(NVIC_ST_CURRENT_R); // random seed depending on when user presses button to start
 	
 	struct Ship ship2;
 	ship2.length = 2;
 	randomPlaceShip(ship2, board);
-	//board[0][0].isShip = 1;
-	//board[1][0].isShip = 1;
-	//board[2][0].isShip = 1;
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
 	Nokia5110_DisplayBuffer();
 	
+	delay1ms(100);
 	
 	while(1)
 	{
@@ -141,11 +159,12 @@ int main(void)
 		oldReading = reading;
 		
 		Nokia5110_SetCursor(8,2);
-		Nokia5110_OutString("Hits");
-		Nokia5110_SetCursor(8,4);
-		Nokia5110_OutString("Miss");
+		Nokia5110_OutString("Shot");
 		Nokia5110_SetCursor(8,3);
-		Nokia5110_OutUDec2(shotsFired); // modified version of OutUDec that doesn't add space
+		Nokia5110_OutUDec2(shotsFired); // modified version of OutUDec that doesn't add space beforehand
+		
+		Nokia5110_SetCursor(8,4);
+		Nokia5110_OutString("Hits");
 		Nokia5110_SetCursor(8,5);
 		Nokia5110_OutUDec2(goodShots);
 		if(goodShots >= SHOTSNEEDED)
