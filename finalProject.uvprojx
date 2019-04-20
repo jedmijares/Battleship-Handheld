@@ -433,11 +433,6 @@
               <FilePath>.\printMatrix.h</FilePath>
             </File>
             <File>
-              <FileName>squares.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\squares.h</FilePath>
-            </File>
-            <File>
               <FileName>Ports.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Ports.c</FilePath>
@@ -461,6 +456,21 @@
               <FileName>random.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\random.s</FilePath>
+            </File>
+            <File>
+              <FileName>structs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\structs.h</FilePath>
+            </File>
+            <File>
+              <FileName>sprite.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sprite.h</FilePath>
+            </File>
+            <File>
+              <FileName>structs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\structs.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,3 +1,6 @@
+#ifndef _random_h
+#define _random_h
+
 /*Random number generator;
   Linear congruential generator 
   from Numerical Recipes by Press et al.
@@ -15,3 +18,5 @@ void Random_Init(unsigned long seed);
 
 unsigned long Random(void);
 unsigned long Random32(void);
+
+#endif

@@ -6,11 +6,12 @@
 #include "Ports.h"
 #include "SysTick.h"
 #include "tm4c123gh6pm.h"
-#include "squares.h"
+#include "structs.h"
 #include "printMatrix.h"
 #include "random.h"
+#include <stdbool.h>
 
-Sea board[8][8];
+struct Square board[8][8];
 short xCursor = 0;
 short yCursor = 0;
 
@@ -69,7 +70,6 @@ int main(void)
 	Ports_Init();
 	SysTick_Init(80000); // interrupt/toggle every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
-	Random_Init(NVIC_ST_CURRENT_R);
 	
 	for(short i = 0; i < 8; i++){
 		for(short j = 0; j < 8; j++){
@@ -77,9 +77,15 @@ int main(void)
 			board[i][j].isShip = 0;
 		}
 	}
-	board[0][0].isShip = 1;
-	board[1][0].isShip = 1;
-	board[2][0].isShip = 1;
+	
+	Random_Init(876445);
+	
+	struct Ship ship2;
+	ship2.length = 2;
+	randomPlaceShip(ship2, board);
+	//board[0][0].isShip = 1;
+	//board[1][0].isShip = 1;
+	//board[2][0].isShip = 1;
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);

@@ -123,7 +123,7 @@ void printGrid(void){
 	Nokia5110_DisplayBuffer();
 }
 
-void print(Sea in[8][8]){
+void print(struct Square in[8][8]){
 	for(short i = 0; i<8; i++){
 		for(short j = 0; j<8; j++){
 			if(in[i][j].isHit && in[i][j].isShip)
@@ -136,7 +136,7 @@ void print(Sea in[8][8]){
 	}
 }
 
-void select(Sea in[8][8], short i, short j){
+void select(struct Square in[8][8], short i, short j){
 	deselect(in, i+1, j);
 	deselect(in, i, j+1);
 	deselect(in, i-1, j);
@@ -149,7 +149,7 @@ void select(Sea in[8][8], short i, short j){
 		Nokia5110_PrintBMP(i*7, j*6+4, outline, 1);
 }
 
-void deselect(Sea in[8][8], short i, short j){
+void deselect(struct Square in[8][8], short i, short j){
 	if(i>=0 && j>=0){
 		if(i<=7 && j<=7){
 			if(in[i][j].isHit && in[i][j].isShip)
