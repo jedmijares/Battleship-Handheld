@@ -2,7 +2,7 @@
 
 void randomPlaceShip(struct Ship ship, struct Square board[8][8])
 {
-	ship.isVertical = false;
+	ship.isVertical = (Random32()%(2));
 	ship.hits = 0;
 	ship.sunk = false;
 	ship.xpos = (Random32()%(8-ship.length+1));
