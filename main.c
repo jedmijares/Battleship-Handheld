@@ -63,7 +63,7 @@ int main(void)
 	short oldReading = 0x11; // previous reading of buttons
 	unsigned long lastDebounceTime = 0; 
 	unsigned long debounceDelay = 50; // time to wait before more button input
-	const short SHOTSNEEDED = 2; // shots needed to win game
+	const short SHOTSNEEDED = 9; // shots needed to win game
 	short reading; // reading of buttons
 	
 	PLL_Init(); // set clock to 80 MHz
@@ -101,14 +101,20 @@ int main(void)
 	Random_Init(NVIC_ST_CURRENT_R); // random seed depending on when user presses button to start
 	
 	struct Ship ship2;
+	struct Ship ship3;
+	struct Ship ship4;
 	ship2.length = 2;
+	ship3.length = 3;
+	ship4.length = 4;
 	randomPlaceShip(ship2, board);
+	randomPlaceShip(ship3, board);
+	randomPlaceShip(ship4, board);
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
 	Nokia5110_DisplayBuffer();
 	
-	delay1ms(100);
+	delay1ms(1000);
 	
 	while(1)
 	{
