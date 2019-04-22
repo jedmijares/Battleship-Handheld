@@ -12,8 +12,14 @@
 #include <stdbool.h>
 
 struct Square board[8][8];
-short xCursor = 0;
-short yCursor = 0;
+
+struct position // uses bitfields: https://www.geeksforgeeks.org/bit-fields-c/
+{ 
+   unsigned int xPos: 3; 
+   unsigned int yPos: 3; 
+}; 
+
+struct position cursor;
 
 
 void checkBounds(short *x , short *y){
@@ -28,30 +34,31 @@ void checkBounds(short *x , short *y){
 }
 
 void fire(){
-	checkBounds(&xCursor, &yCursor);
-	board[xCursor][yCursor].isHit = 1;
-	select(board, xCursor, yCursor);
+	//checkBounds(&cursor.xPos, &cursor.yPos);
+	board[cursor.xPos][cursor.yPos].isHit = 1;
+	select(board, cursor.xPos, cursor.yPos);
 }
 
-void xPlus(){
-	xCursor++;
-	checkBounds(&xCursor, &yCursor);
-	select(board, xCursor, yCursor);
+void xPlus(struct position cursor){
+	//cursor.xPos++;
+	cursor.xPos++;
+	//checkBounds(&cursor.xPos, &cursor.yPos);
+	select(board, cursor.xPos, cursor.yPos);
 }
-void yPlus(){
-	yCursor++;
-	checkBounds(&xCursor, &yCursor);
-	select(board, xCursor, yCursor);
+void yPlus(struct position cursor){
+	cursor.yPos++;
+	//checkBounds(&cursor.xPos, &cursor.yPos);
+	select(board, cursor.xPos, cursor.yPos);
 }
-void xMinus(){
-	xCursor--;
-	checkBounds(&xCursor, &yCursor);
-	select(board, xCursor, yCursor);
+void xMinus(struct position cursor){
+	cursor.xPos--;
+	//checkBounds(&cursor.xPos, &cursor.yPos);
+	select(board, cursor.xPos, cursor.yPos);
 }
-void yMinus(){
-	yCursor--;
-	checkBounds(&xCursor, &yCursor);
-	select(board, xCursor, yCursor);
+void yMinus(struct position cursor){
+	cursor.yPos--;
+	//checkBounds(&cursor.xPos, &cursor.yPos);
+	select(board, cursor.xPos, cursor.yPos);
 }
 
 int main(void)
@@ -65,6 +72,10 @@ int main(void)
 	unsigned long debounceDelay = 50; // time to wait before more button input
 	const short SHOTSNEEDED = 9; // shots needed to win game
 	short reading; // reading of buttons
+	
+	//struct position cursor;
+	cursor.xPos = 0;
+	cursor.yPos = 0;
 	
 	PLL_Init(); // set clock to 80 MHz
 	Ports_Init();
@@ -111,7 +122,7 @@ int main(void)
 	randomPlaceShip(ship4, board);
 	printGrid();
 	print(board);
-	select(board, xCursor, yCursor);
+	select(board, cursor.xPos, cursor.yPos);
 	Nokia5110_DisplayBuffer();
 	
 	delay1ms(1000);
@@ -125,33 +136,33 @@ int main(void)
 			if (reading != buttonState) // if the reading does not match what the computer thinks the button was last, step in
 			{
 				buttonState = reading;
-				if(rightPressed() && xCursor < 7)
+				if(rightPressed())// && cursor.xPos < 7)
 				{
-					xPlus();
+					xPlus(cursor);
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
-				if(downPressed() && yCursor < 7)
+				if(downPressed())// && cursor.yPos < 7)
 				{
-					yPlus();
+					yPlus(cursor);
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
-				if(leftPressed() && xCursor >0)
+				if(leftPressed())// && cursor.xPos >0)
 				{
-					xMinus();
+					xMinus(cursor);
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
-				if(upPressed() && yCursor > 0)
+				if(upPressed())// && cursor.yPos > 0)
 				{
-					yMinus();
+					yMinus(cursor);
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
 				if(selectPressed()) 
 				{
-					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) 
+					if(board[cursor.xPos][cursor.yPos].isHit == 0 & board[cursor.xPos][cursor.yPos].isShip == 1) 
 					{
 						goodShots++;
 					}
