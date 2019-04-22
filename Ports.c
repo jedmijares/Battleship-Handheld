@@ -3,10 +3,11 @@
 #include "tm4c123gh6pm.h"
 
 
-#define PF40 (*((volatile unsigned long *)0x40025044))
+#define PF40 (*((volatile unsigned long *)0x40025044)) // onboard buttons
 #define RLED (*((volatile unsigned long *)0x40025008))
 #define GLED (*((volatile unsigned long *)0x40025020))
 #define BLED (*((volatile unsigned long *)0x40025010))
+	
 #define BUZZER (*((volatile unsigned long *)0x40004040)) // PA4
 	
 #define BBUTTONS (*((volatile unsigned long *)0x400053CC)) // B 0 1 4 5 6 7
