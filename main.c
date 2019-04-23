@@ -151,7 +151,7 @@ int main(void)
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
-				if(selectPressed() & board[xCursor][yCursor].isHit == 0) 
+				if(selectPressed() && board[xCursor][yCursor].isHit == 0) 
 				{
 					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].shipID >= 0) 
 					{
