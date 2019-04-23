@@ -463,11 +463,6 @@
               <FilePath>.\structs.h</FilePath>
             </File>
             <File>
-              <FileName>sprite.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\sprite.h</FilePath>
-            </File>
-            <File>
               <FileName>structs.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\structs.c</FilePath>
