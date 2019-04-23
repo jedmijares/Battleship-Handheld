@@ -65,6 +65,7 @@ int main(void)
 	unsigned long debounceDelay = 50; // time to wait before more button input
 	const short SHOTSNEEDED = 9; // shots needed to win game
 	short reading; // reading of buttons
+	unsigned long startTime; // used to prevent accidental input at start of game
 	
 	PLL_Init(); // set clock to 80 MHz
 	Ports_Init();
@@ -95,7 +96,8 @@ int main(void)
 	Nokia5110_OutString("Battleship");
 	
 	//delay1ms(2000);
-	while(!readBButtons()) {}
+//oldReading = readBButtons();
+	while(!readBButtons()) {} //oldReading) oldReading = readBButtons();
 	Nokia5110_Clear();
 	
 	Random_Init(NVIC_ST_CURRENT_R); // random seed depending on when user presses button to start
@@ -117,8 +119,9 @@ int main(void)
 		
 	ships[1].hits = 0; // for some reason this is necessary????????
 										 // like, this is seriously bizzare. For some reason ships[1].hits gets initialized to 0x2000 in the randomPlaceShip function, and it's the only one to do so
+	lastDebounceTime = millis();
 	
-	while(1)
+	while(1) //startTime <= (millis()-10))// - 150)) // couldn't get this to work for whatever reason
 	{
 		reading = readBButtons(); // read value of buttons
 		if(reading != oldReading ) lastDebounceTime = millis(); // if reading does not match last value, we're still bouncing
