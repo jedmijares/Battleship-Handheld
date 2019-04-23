@@ -21,3 +21,8 @@ We used an 8x8 grid for the board as it fit nicely on the Nokia's 48x84 pixel sc
 * Piezo Buzzer
 * 10kR Resistor (6)
 * Pushbutton Switch (6)
+
+### Optional Components
+
+* 330R Resistor (may be used to enable the backlight)
+* 4-pin terminal block (breaks out the UART pins that we didn't have time to get to)
