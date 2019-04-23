@@ -74,7 +74,7 @@ int main(void)
 	for(short i = 0; i < 8; i++){  // reset board
 		for(short j = 0; j < 8; j++){
 			board[i][j].isHit = 0;
-			board[i][j].isShip = 0;
+			board[i][j].shipID = -1;
 		}
 	}
 	
@@ -99,22 +99,24 @@ int main(void)
 	Nokia5110_Clear();
 	
 	Random_Init(NVIC_ST_CURRENT_R); // random seed depending on when user presses button to start
-	
-	struct Ship ship2;
-	struct Ship ship3;
-	struct Ship ship4;
-	ship2.length = 2;
-	ship3.length = 3;
-	ship4.length = 4;
-	randomPlaceShip(ship2, board);
-	randomPlaceShip(ship3, board);
-	randomPlaceShip(ship4, board);
+		
+	struct Ship ships[3];
+	ships[0].length = 2;
+	ships[1].length = 3;
+	ships[2].length = 4;
+	ships[0].ID = 0;
+	ships[1].ID = 1;
+	ships[2].ID = 2;
+	randomPlaceShip(ships[0], board);
+	randomPlaceShip(ships[1], board);
+	randomPlaceShip(ships[2], board);
 	printGrid();
 	print(board);
 	select(board, xCursor, yCursor);
 	Nokia5110_DisplayBuffer();
-	
-	delay1ms(1000);
+		
+	ships[1].hits = 0; // for some reason this is necessary????????
+										 // like, this is seriously bizzare. For some reason ships[1].hits gets initialized to 0x2000 in the randomPlaceShip function, and it's the only one to do so
 	
 	while(1)
 	{
@@ -149,11 +151,13 @@ int main(void)
 					Nokia5110_DisplayBuffer();
 					beep(50);
 				}
-				if(selectPressed()) 
+				if(selectPressed() & board[xCursor][yCursor].isHit == 0) 
 				{
-					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].isShip == 1) 
+					if(board[xCursor][yCursor].isHit == 0 & board[xCursor][yCursor].shipID >= 0) 
 					{
 						goodShots++;
+						ships[board[xCursor][yCursor].shipID].hits++;
+						
 					}
 					fire();
 					shotsFired++;
@@ -164,19 +168,45 @@ int main(void)
 		}
 		oldReading = reading;
 		
-		Nokia5110_SetCursor(8,2);
+		Nokia5110_SetCursor(8,0);
 		Nokia5110_OutString("Shot");
-		Nokia5110_SetCursor(8,3);
+		Nokia5110_SetCursor(8,1);
 		Nokia5110_OutUDec2(shotsFired); // modified version of OutUDec that doesn't add space beforehand
 		
-		Nokia5110_SetCursor(8,4);
+		Nokia5110_SetCursor(8,2);
 		Nokia5110_OutString("Hits");
-		Nokia5110_SetCursor(8,5);
+		Nokia5110_SetCursor(8,3);
 		Nokia5110_OutUDec2(goodShots);
+		
+		Nokia5110_SetCursor(8,4);
+		Nokia5110_OutString("Sunk");
+		if(ships[1].length <= ships[1].hits)
+		{
+			Nokia5110_SetCursor(9,5);
+			Nokia5110_OutString("3");
+		}
+		if(ships[0].length == ships[0].hits)
+		{
+			Nokia5110_SetCursor(8,5);
+			Nokia5110_OutChar('2');
+		}
+		if(ships[2].length == ships[2].hits)
+		{
+			Nokia5110_SetCursor(10,5);
+			Nokia5110_OutChar('4');
+		}
+		
 		if(goodShots >= SHOTSNEEDED)
 		{
-			Nokia5110_SetCursor(8,1);
-			Nokia5110_OutString("WIN");
+			while(!readBButtons()) // really bad win screen
+			{
+				Nokia5110_SetCursor(8,0);
+				Nokia5110_OutString("Shot");
+				Nokia5110_SetCursor(8,1);
+				Nokia5110_OutUDec2(shotsFired);
+				Nokia5110_SetCursor(0,0);
+				Nokia5110_OutString("Winner");
+			}
 		}
 	}
 }

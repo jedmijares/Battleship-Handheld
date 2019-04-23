@@ -6,8 +6,8 @@
 
 struct Square
 {
-	bool isShip;
-	bool isHit;
+	short shipID; // ID of the ship there, or 0 otherwise
+	bool isHit; // has square been targeted yet
 };
 
 #define MAXLENGTH 4
@@ -16,9 +16,10 @@ struct Ship
 	short xpos;
 	short ypos;
 	short length;
+	short ID;
 	bool isVertical;
 	short hits;
-	bool sunk;
+	//bool sunk;
 };
 
 void randomPlaceShip(struct Ship ship, struct Square board[8][8]);
