@@ -380,92 +380,92 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source Group 1</GroupName>
+          <GroupName>Source</GroupName>
           <Files>
             <File>
-              <FileName>PLL.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\PLL.c</FilePath>
-            </File>
-            <File>
-              <FileName>SysTick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\SysTick.c</FilePath>
-            </File>
-            <File>
-              <FileName>PLL.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\PLL.h</FilePath>
-            </File>
-            <File>
-              <FileName>SysTick.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\SysTick.h</FilePath>
-            </File>
-            <File>
-              <FileName>tm4c123gh6pm.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\tm4c123gh6pm.h</FilePath>
+              <FilePath>.\Source\main.c</FilePath>
             </File>
             <File>
               <FileName>Nokia5110.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Nokia5110.c</FilePath>
-            </File>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>printMatrix.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\printMatrix.c</FilePath>
-            </File>
-            <File>
-              <FileName>printMatrix.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\printMatrix.h</FilePath>
-            </File>
-            <File>
-              <FileName>Ports.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Ports.c</FilePath>
-            </File>
-            <File>
-              <FileName>Ports.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Ports.h</FilePath>
+              <FilePath>.\Source\Nokia5110.c</FilePath>
             </File>
             <File>
               <FileName>Nokia5110.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Nokia5110.h</FilePath>
+              <FilePath>.\Source\Nokia5110.h</FilePath>
+            </File>
+            <File>
+              <FileName>PLL.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\PLL.c</FilePath>
+            </File>
+            <File>
+              <FileName>PLL.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\PLL.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ports.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Ports.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ports.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\Ports.h</FilePath>
+            </File>
+            <File>
+              <FileName>printMatrix.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\printMatrix.c</FilePath>
+            </File>
+            <File>
+              <FileName>printMatrix.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\printMatrix.h</FilePath>
             </File>
             <File>
               <FileName>random.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\random.h</FilePath>
+              <FilePath>.\Source\random.h</FilePath>
             </File>
             <File>
               <FileName>random.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\random.s</FilePath>
-            </File>
-            <File>
-              <FileName>structs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\structs.h</FilePath>
-            </File>
-            <File>
-              <FileName>structs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\structs.c</FilePath>
+              <FilePath>.\Source\random.s</FilePath>
             </File>
             <File>
               <FileName>startup.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\startup.s</FilePath>
+              <FilePath>.\Source\startup.s</FilePath>
+            </File>
+            <File>
+              <FileName>structs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\structs.c</FilePath>
+            </File>
+            <File>
+              <FileName>structs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\structs.h</FilePath>
+            </File>
+            <File>
+              <FileName>SysTick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SysTick.c</FilePath>
+            </File>
+            <File>
+              <FileName>SysTick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SysTick.h</FilePath>
+            </File>
+            <File>
+              <FileName>tm4c123gh6pm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\tm4c123gh6pm.h</FilePath>
             </File>
           </Files>
         </Group>
