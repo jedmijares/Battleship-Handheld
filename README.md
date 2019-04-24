@@ -2,7 +2,7 @@
 
 This project was created as the final project for EE 287 (Intro to Embedded Systems).
 
-## Building
+## Compiling
 
 Battleship was written and may be built with Keil uVision5.
 
