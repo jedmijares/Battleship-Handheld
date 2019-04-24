@@ -16,13 +16,19 @@ We used an 8x8 grid for the board as it fit nicely on the Nokia's 48x84 pixel sc
 
 ## Parts List
 
-* TM4C123G LaunchPad™ Evaluation Kit
+* TM4C123G LaunchPad Evaluation Kit
 * Nokia 5110 Screen Breakout Board
 * Piezo Buzzer
-* 10kR Resistor (6)
-* Pushbutton Switch (6)
+* 10kR Resistor (5)
+* Pushbutton Switch (5)
 
 ### Optional Components
 
 * 330R Resistor (may be used to enable the backlight)
 * 4-pin terminal block (breaks out the UART pins that we didn't have time to get to)
+* 10kR Resistor (for extra button that currently serves no purpose)
+* Pushbutton Switch (extra button that currently serves no purpose)
+
+## Block Diagram
+
+[Code Block Diagram](https://github.com/jedmijares/EE-287-Final-Project/blob/master/Media/Code%20Block%20Diagram.pdf)
