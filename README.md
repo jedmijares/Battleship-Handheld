@@ -1,4 +1,4 @@
-# EE 287 Final Project
+# Battleship Handheld
 
 This project was created as the final project for EE 287 (Intro to Embedded Systems).
 
