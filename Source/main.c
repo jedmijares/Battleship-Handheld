@@ -111,7 +111,7 @@ startGame:
 	Nokia5110_OutString("Present");
 	Nokia5110_SetCursor(1,4);
 	Nokia5110_OutString("Battleship");
-	
+	delay1ms(500);
 //oldReading = readBButtons();
 	while(!readBButtons()) {} //oldReading) oldReading = readBButtons();
 	Nokia5110_Clear();
@@ -218,6 +218,40 @@ startGame:
 				Nokia5110_DisplayBuffer();
 				Nokia5110_SetCursor(5,5);
 				Nokia5110_OutUDec2(shotsFired);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			}
 			beep(50);
 			goto startGame;
