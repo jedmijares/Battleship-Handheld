@@ -8,5 +8,6 @@ void printGrid(void);
 void print(struct Square in[8][8]);
 void select(struct Square in[8][8], short x, short y);
 void deselect(struct Square in[8][8], short x, short y);
+void winscreen(int hits);
 
 #endif

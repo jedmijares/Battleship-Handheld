@@ -212,7 +212,7 @@ startGame:
 		{
 			Nokia5110_Clear();
 			delay1ms(500);
-			while(!readBButtons()) // really bad win screen
+			while(!readBButtons())
 			{
 				winscreen(shotsFired);
 				Nokia5110_DisplayBuffer();
