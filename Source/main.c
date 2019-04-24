@@ -58,7 +58,6 @@ int main(void)
 {	
 	int shotsFired = 0;
 	int goodShots = 0; // number of successful hits against ships
-
 	short buttonState; // actually used to check input
 	short oldReading = 0x11; // previous reading of buttons
 	unsigned long lastDebounceTime = 0; 
@@ -72,6 +71,23 @@ int main(void)
 	SysTick_Init(80000); // interrupt every 80,000 cycles (1 ms at 80 MHz)
 	Nokia5110_Init();
 	
+	struct Ship ships[3];
+	ships[0].length = 2;
+	ships[1].length = 3;
+	ships[2].length = 4;
+	ships[0].ID = 0;
+	ships[1].ID = 1;
+	ships[2].ID = 2;
+	
+startGame:
+	shotsFired = 0;
+	goodShots = 0;
+	ships[0].hits = 0;
+	ships[1].hits = 0;
+	ships[2].hits = 0;
+  delay1ms(500);
+	
+	
 	for(short i = 0; i < 8; i++){  // reset board
 		for(short j = 0; j < 8; j++){
 			board[i][j].isHit = 0;
@@ -80,6 +96,7 @@ int main(void)
 	}
 	
 	Nokia5110_Clear();
+	Nokia5110_ClearBuffer();
 	Nokia5110_SetCursor(1,1);
 	Nokia5110_OutString("Jed");
 	Nokia5110_SetCursor(2,2);
@@ -95,20 +112,12 @@ int main(void)
 	Nokia5110_SetCursor(1,4);
 	Nokia5110_OutString("Battleship");
 	
-	//delay1ms(2000);
 //oldReading = readBButtons();
 	while(!readBButtons()) {} //oldReading) oldReading = readBButtons();
 	Nokia5110_Clear();
 	
 	Random_Init(NVIC_ST_CURRENT_R); // random seed depending on when user presses button to start
 		
-	struct Ship ships[3];
-	ships[0].length = 2;
-	ships[1].length = 3;
-	ships[2].length = 4;
-	ships[0].ID = 0;
-	ships[1].ID = 1;
-	ships[2].ID = 2;
 	randomPlaceShip(ships[0], board);
 	randomPlaceShip(ships[1], board);
 	randomPlaceShip(ships[2], board);
@@ -201,15 +210,17 @@ int main(void)
 		
 		if(goodShots >= SHOTSNEEDED)
 		{
+			Nokia5110_Clear();
+			delay1ms(500);
 			while(!readBButtons()) // really bad win screen
 			{
-				Nokia5110_SetCursor(8,0);
-				Nokia5110_OutString("Shot");
-				Nokia5110_SetCursor(8,1);
+				winscreen(shotsFired);
+				Nokia5110_DisplayBuffer();
+				Nokia5110_SetCursor(5,5);
 				Nokia5110_OutUDec2(shotsFired);
-				Nokia5110_SetCursor(0,0);
-				Nokia5110_OutString("Winner");
 			}
+			beep(50);
+			goto startGame;
 		}
 	}
 }
