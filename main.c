@@ -65,7 +65,7 @@ int main(void)
 	unsigned long debounceDelay = 50; // time to wait before more button input
 	const short SHOTSNEEDED = 9; // shots needed to win game
 	short reading; // reading of buttons
-	unsigned long startTime; // used to prevent accidental input at start of game
+	//unsigned long startTime; // used to prevent accidental input at start of game
 	
 	PLL_Init(); // set clock to 80 MHz
 	Ports_Init();
