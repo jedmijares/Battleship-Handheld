@@ -217,41 +217,7 @@ startGame:
 				winscreen(shotsFired);
 				Nokia5110_DisplayBuffer();
 				Nokia5110_SetCursor(5,5);
-				Nokia5110_OutUDec2(shotsFired);
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				Nokia5110_OutUDec2(shotsFired);	
 			}
 			beep(50);
 			goto startGame;
