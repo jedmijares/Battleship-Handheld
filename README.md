@@ -42,6 +42,9 @@ The PCB features several extraneous components. These include a terminal block f
 ## Explanation of Major Components
 
 The Tiva board is crucial to the project, and controls all the other components and handles the processing for the game itself.
+
 The Tiva communicates with the Nokia 5110 screen serially and uses it to communicate all visual output.
+
 A piezo buzzer is also implemented. Whenever a button is pressed, the SysTick timer is used to oscillate the buzzer pin for a specified number of milliseconds.
+
 The PCB was designed in Autodesk EAGLE. Relevant design files are in the EAGLE folder.
