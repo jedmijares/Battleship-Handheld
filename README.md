@@ -48,3 +48,7 @@ The Tiva communicates with the Nokia 5110 screen serially and uses it to communi
 A piezo buzzer is also implemented. Whenever a button is pressed, the SysTick timer is used to oscillate the buzzer pin for a specified number of milliseconds.
 
 The PCB was designed in Autodesk EAGLE. Relevant design files are in the EAGLE folder.
+
+## YouTube Video
+
+[Watch Here](https://www.youtube.com/watch?v=jDSAx5fQOlo)
