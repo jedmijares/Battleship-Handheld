@@ -1,6 +1,6 @@
 # Battleship Handheld
 
-This project was created as the final project for EE 287 (Intro to Embedded Systems).
+This project was created as the final project for EE 287 (Intro to Embedded Systems), by Jed Mijares and Jacob Culler.
 
 ## Compiling
 
