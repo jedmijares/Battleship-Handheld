@@ -35,9 +35,9 @@ The PCB features several extraneous components. These include a terminal block f
 * 10kR Resistor (for extra button that currently serves no purpose)
 * Pushbutton Switch (extra button that currently serves no purpose)
 
-## Block Diagram
+## Flow Diagram
 
-[Code Block Diagram](https://github.com/jedmijares/EE-287-Final-Project/blob/master/Media/Code%20Block%20Diagram.pdf)
+[Code Flow Diagram](https://github.com/jedmijares/EE-287-Final-Project/blob/master/Media/Code%20Block%20Diagram.pdf)
 
 ## Explanation of Major Components
 
